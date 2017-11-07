@@ -64,7 +64,7 @@
         #DFW Rule Names
         #$InterDesktopFWRule = "Inter Desktop FW Rule"
         
-        #Services
+        #Service Names
 
         $SVHZNClient2ConnServerHTTPName = "Horizon 7 HTTP Horizon Client to View Connection Servers Standard",
         $SVHZNClient2ConnServerHTTPSName = "Horizon 7 HTTPS Horizon Client to View Connection Servers SSL",
@@ -85,7 +85,7 @@
         $SVHZNBEClient2UAGUDP443Name = "Horizon 7 Blast Extreme UDP 443 Poor Typical Horizon Client to Unified Access Gateway",
         $SVHZNBEClient2UAGUDP8443Name = "Horizon 7 Blast Extreme UDP 8443 Poor Typical Horizon Client to Unified Access Gateway",
         $SVHZNBrowser2UAGHTMLName = "Horizon 7 Browser to Unified Access Gateway HTML Access",
-        $SVHZNBrowser2UAGName = "Horizon 7 Browser to Unified Access Gateway",
+        $SVHZNBrowser2UAGVIDMName = "Horizon 7 Browser to Unified Access Gateway VIDM",
         $SVHZNClient2ConnServerTunnHTTPSName = "Horizon 7 HTTPS Horizon Client to Connection Servers Tunneled",
         $SVHZNClient2ConnServerTunnHTTPName = "Horizon 7 HTTP Horizon Client to View Connection Servers Tunneled",
         $SVHZNBEClient2ConnServerTCPName = "Horizon 7 Blast Extreme TCP Excellent Typical Horizon Client to View Connection Server",
@@ -172,9 +172,51 @@
         $SVHZNAdmin2V4HName = "Horizon 7 Admin Console to V4H",
         $SVHZNAdmin2UAGName = "Horizon 7 Admin Console to Unified Access Gateway"
 
-        #Service Groups
+        #Service Port and Protocol
+        
+        #Protocol
+        $t = "tcp"
+        $u = "udp"
+        
+        #Port
+        $HTTP = "80"
+        $HTTPS = "443"
+        $BLAST = "22443"
+        $PCOIP = "4172"
+        $RDP = "3389"
+        $CDRMMR = "9427"
+        $USB = "32111"
+        $HTTPS8443 = "8443"
+        $JMSE = "4002"
+        $JMSL = "4001"
+        $RMI = "3091"
+        $DMS = "3099"
+        $SMB = "445"
+        $SOAP = "18443"
+        $JMSL2 = "4100"
+        $JMSSSL = "4101"
+        $CPALDAP = "22389"
+        $CPALDAPS = "22636"
+        $VIPA = "8472"
+        $RMI2 = "3901"
+        $BMS = "3101"
+        $CMS = "3100"
+        $2FA = "5500"
+        $SOAP2 = "902"
+        $LDAP = "389"
+        $AUDIT = "9300-9400"
+        $SMTP = "25"
+        $KERB = "88"
+        $KERBPWD = "464"
+        $RPC = "135"
+        $DNS = "53"
+        $MSSQL = "1433"
+        $PSQL = "5432"
+        $ORACLE = "1521"
+        $DMS2 = "3909"
+        $HTTPS9443 = "9443"
 
-
+        
     )
 
     ##Build New Horizon 7 DFW Sections
