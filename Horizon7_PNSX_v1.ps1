@@ -478,11 +478,58 @@
         #Build New Service Groups
    
         #Build Firewall Rules
-        $FWRInterDesktopFWRuleName = "Inter Desktop FW Rule"
-        $FWRInterDesktopFWRule = Get-NsxFirewallRule -Name $FWRInterDesktopFWRuleName
-        if (!$FWRInterDesktopFWRule)
-        {
-          $FWRInterDesktopFWRule = Get-NsxFirewallSection $SNHorizonDesktopBlockSectionName | New-NsxFirewallRule -name $InterDesktopFWRule -action deny -Direction inout -Source $SGHorizonViewDesktops -Destination $SGHorizonViewDesktops -EnableLogging -AppliedTo $SGHorizonViewDesktops
-          }
+        #$FWRInterDesktopFWRuleName = "Inter Desktop FW Rule"
+        #$FWRInterDesktopFWRule = Get-NsxFirewallRule -Name $FWRInterDesktopFWRuleName
+        #if (!$FWRInterDesktopFWRule)
+        #{
+        #  $FWRInterDesktopFWRule = Get-NsxFirewallSection $SNHorizonDesktopBlockSectionName | New-NsxFirewallRule -name $InterDesktopFWRule -action deny -Direction inout -Source $SGHorizonViewDesktops -Destination $SGHorizonViewDesktops -EnableLogging -AppliedTo $SGHorizonViewDesktops
+        #  }
   
-   
+        
+        $RNHZNClient2ConnServerName = "Internal - Horizon Client to View Connection Server",
+        $RNHZNClient2AgentName = "Internal - Horizon Client to Horizon Agent",
+        $RNHZNBrowser2AgentHTMLName = "Internal - Browser to Horizon Agent HTML",
+        $RNHZNBrowser2VIDMName = "Internal - Browser to vIDM",
+        $RNHZNClient2UAGName = "External - Horizon Client to UAG",
+        $RNHZNClient2ConnServerTunnName = "Tunneled - Horizon Client to View Connection Server HTTPS",
+        $RNHZNBrowser2AgentTunnName = "Tunneled - Browser to View Connection Server",
+        $RNHZNBrowser2VIDMTunnName = "Tunneled - Browser to VIDM",
+        $RNHZNAgent2ConnServerName = "Desktops - Horizon Agent to View Connection Server JMS",
+        $RNHZNAgent2V4HName = "Desktops - Horizon Agent to V4H",
+        $RNAPPVAgent2APPVMGRName = "Desktops - App Volumes Agent to App Volumes Manager",
+        $RNUEMMGR2UEMFSSMBName = "Desktops - UEM Flex Engine to UEM File Servers",
+        $RNHZNConnServ2AgentTunnName = "Infrastructure - View Connection Server to Horizon Agent Tunneled",
+        $RNHZNConnServer2vCenterName = "Infrastructure - View Connection Server to vCenter Server",
+        $RNHZNConnServer2CompName = "Infrastructure - View Connection Server to View Composer",
+        $RNHZNConnServer2ConnServerName = "Infrastructure - View Connection Server to View Connection Server",
+        $RNHZNConnServer2EnrollmentName = "Infrastructure - View Connection Server to Enrollment Server",
+        $RNHZNConnServer2VIDMName = "Infrastructure - View Connection Server to VIDM",
+        $RNHZNConnServer2V4HName = "Infrastructure - View Connection Server to V4H",
+        $RNHZNConnServer22FAMGRName = "Infrastructure - View Connection Server to 2FA Manager",
+        $RNvCenter2ESXiName = "Infrastructure - vCenter Server to ESXi",
+        $RNHZNComp2vCenterName = "Infrastructure - View Composer to vCenter Server",
+        $RNHZNComp2ESXiName = "Infrastructure - View Composer to ESXi",
+        $RNHZNUAG2ConnServerName = "Infrastructure - UAG to View Connection Server",
+        $RNHZNUAG2AgentName = "Infrastructure - UAG to Horizon Agent",
+        $RNHZNVIDM2ConnServerName = "Infrastructure - VIDM to View Connection Server",
+        $RNHZNVIDM2VIDMName = "Infrastructure - VIDM to VIDM",
+        $RNHZNVIDM2SMTPName = "Infrastructure - VIDM to SMTP Server",
+        $RNHZNVIDM2DCName = "Infrastructure - VIDM to Domain Controller",
+        $RNHZNVIDM2DNSName = "Infrastructure - VIDM to DNS",
+        $RNHZNVIDM2CTXBName = "Infrastructure - VIDM to Citrix Integration",
+        $RNHZNVIDM2ThinAppFSName = "Infrastructure - VIDM to ThinApp FS",
+        $RNHZNVIDM2UpgradeServerName = "Infrastructure - VIDM to Upgrade Server",
+        $RNHZNVIDM22FAMGRName = "Infrastructure - VIDM to 2FA Manager",
+        $RNHZNVIDM2AirWatchName = "Infrastructure - VIDM to AirWatch",
+        $RNHZNVIDM2Name = "Infrastructure - VIDM to External DB",
+        $RNHZNAPPVMGR2vCenterName = "Infrastructure - App Volumes Manager to vCenter Server",
+        $RNHZNAPPVMGR2ESXiName = "Infrastructure - App Volumes Manager to ESXi",
+        $RNHZNAPPVMGR2Name = "Infrastructure - App Volumes Manager to External DB",
+        $RNV4H2ConnServerName = "Infrastructure - V4H to View Connection Server",
+        $RNV4H2AgentName = "Infrastrucutre - V4H to Horizon Agent",
+        $RNV4H2UAGMonitorName = "Infrastructure - V4H to UAG Monitoring",
+        $RNV4H2APPVMGRMonitorName = "Infrastructure - V4H to App Volumes Manager Monitoring",
+        $RNHZNAdmin2Name = "Management - Admin Console to Conn Server, vCenter, AppV Mgr, V4H",
+        $RNHZNAdmin2UAGName = "Management - Admin Console to UAG",
+        $RNHZNAdmin2VIDMName = "Management - Admin Console to VIDM"
+
