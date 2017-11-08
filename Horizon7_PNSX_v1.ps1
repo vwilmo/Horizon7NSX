@@ -222,7 +222,16 @@
         $SVHZN7Admin2APPVMGRName = "Horizon 7 Admin Console to App Volumes Manager",
         $SVHZN7Admin2VIDMName = "Horizon 7 Admin Console to VMware Identity Manager",
         $SVHZN7Admin2V4HName = "Horizon 7 Admin Console to V4H",
-        $SVHZN7Admin2UAGName = "Horizon 7 Admin Console to Unified Access Gateway"
+        $SVHZN7Admin2UAGName = "Horizon 7 Admin Console to Unified Access Gateway",
+
+        #IP Sets for VIPs and other
+        $IPHorizon7UpdateServer = "IP-Horizon7-UpdateServer",
+        $IPHorizon7ConnServerVIP = "IP-Horizon7-ConnServer-VIP",
+        $IPHorizon7UAGVIP = "IP-Horizon7-UAG-VIP",
+        $IPHorizon7AppVolVIP = "IP-Horizon7-AppVol-VIP",
+        $IPHorizon7vIDMVIP = "IP-Horizon7-vIDM-VIP",
+        $IPHorizon7AdminConsole = "IP-Horizon7-AdminConsole",
+        $IPHorizon7VDIESXi = "IP-Horizon7-VDI-ESXi",
 
         #Service Port and Protocol
         
