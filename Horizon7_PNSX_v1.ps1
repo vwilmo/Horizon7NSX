@@ -28,14 +28,14 @@
         $SGHZN7DatabaseName = "SG-Horizon7-Database",
         
         #Security Tags
-        $STHZN7ClientName = "ST-Horizon7Client",
-        $STHZN7ConnServerName = "ST-Horizon7ConnServer",
-        $STHZN7vIDMName = "ST-Horizon7vIDM",
-        $STHZN7UAGName = "ST-Horizon7UAG",
-        $STHZN7VDIName = "ST-Horizon7VDI",
-        $STHZN7RDSHostName = "ST-Horizon7RDSHost",
-        $STHZN7EnrollServerName = "ST-Horizon7EnrollServer",
-        $STHZN7AppVolMgrName = "ST-Horizon7AppVolMgr",
+        $STHZN7ClientName = "ST-Horizon7-Client",
+        $STHZN7ConnServerName = "ST-Horizon7-ConnServer",
+        $STHZN7vIDMName = "ST-Horizon7-vIDM",
+        $STHZN7UAGName = "ST-Horizon7-UAG",
+        $STHZN7VDIName = "ST-Horizon7-VDI",
+        $STHZN7RDSHostName = "ST-Horizon7-RDSHost",
+        $STHZN7EnrollServerName = "ST-Horizon7-EnrollServer",
+        $STHZN7AppVolMgrName = "ST-Horizon7-AppVolMgr",
         $STHZN7vCenterMGMTName = "ST-Horizon7-vCenterMgmt",
         $STHZN7vCenterVDI_RDSHName = "ST-Horizon7-vCenterVDI_RDSH",
         $STHZN7UEM_FSName = "ST-Horizon7-UEM_FS",
@@ -49,8 +49,8 @@
         $STHZN72FAName = "ST-Horizon7-2FA",
         $STHZN7AirWatchName = "ST-Horizon7-AirWatch",
         $STHZN7V4HName = "ST-Horizon7-V4H",
-        $STHZN7AdminConsole = "ST-Horizon7-AdminConsole",
-        $STHZN7Database = "ST-Horizon7-Database",
+        $STHZN7AdminConsoleName = "ST-Horizon7-AdminConsole",
+        $STHZN7DatabaseName = "ST-Horizon7-Database",
         
         #DFW Firewall Section Names
         $SNHZN7ConnExternalSectionName = "Horizon 7 Connectivity - External Connections",
@@ -237,46 +237,47 @@
         #Service Port and Protocol
         
         #Protocol
-        $TCP = "tcp"
-        $UDP = "udp"
+        $TCP = "tcp",
+        $UDP = "udp",
         
         #Port
-        $80 = "80"
-        $443 = "443"
-        $22443 = "22443"
-        $4172 = "4172"
-        $3389 = "3389"
-        $9427 = "9427"
-        $32111 = "32111"
-        $8443 = "8443"
-        $4002 = "4002"
-        $4001 = "4001"
-        $3091 = "3091"
-        $3099 = "3099"
-        $445 = "445"
-        $18443 = "18443"
-        $4100 = "4100"
-        $4101 = "4101"
-        $22389 = "22389"
-        $22636 = "22636"
-        $8472 = "8472"
-        $3901 = "3901"
-        $3101 = "3101"
-        $3100 = "3100"
-        $5500 = "5500"
-        $902 = "902"
-        $389 = "389"
-        $93009400 = "9300-9400"
-        $25 = "25"
-        $88 = "88"
-        $464 = "464"
-        $135 = "135"
-        $53 = "53"
-        $1433 = "1433"
-        $5432 = "5432"
-        $1521 = "1521"
-        $3909 = "3909"
+        $80 = "80",
+        $443 = "443",
+        $22443 = "22443",
+        $4172 = "4172",
+        $3389 = "3389",
+        $9427 = "9427",
+        $32111 = "32111",
+        $8443 = "8443",
+        $4002 = "4002",
+        $4001 = "4001",
+        $3091 = "3091",
+        $3099 = "3099",
+        $445 = "445",
+        $18443 = "18443",
+        $4100 = "4100",
+        $4101 = "4101",
+        $22389 = "22389",
+        $22636 = "22636",
+        $8472 = "8472",
+        $3901 = "3901",
+        $3101 = "3101",
+        $3100 = "3100",
+        $5500 = "5500",
+        $902 = "902",
+        $389 = "389",
+        $93009400 = "9300-9400",
+        $25 = "25",
+        $88 = "88",
+        $464 = "464",
+        $135 = "135",
+        $53 = "53",
+        $1433 = "1433",
+        $5432 = "5432",
+        $1521 = "1521",
+        $3909 = "3909",
         $9443 = "9443"
+        )
 
         ##Build New Horizon 7 DFW Sections
         ##Checks if Section exists first
@@ -386,7 +387,7 @@
         $SGHZN7AirWatch = New-NsxSecurityGroup -name $SGHZN7AirWatchName -IncludeMember (Get-NsxSecurityTag -Name $STHZN7AirWatchName)
         $SGHZN7V4H = New-NsxSecurityGroup -name $SGHZN7V4HName -IncludeMember (Get-NsxSecurityTag -name $STHZN7V4HName)
         $SGHZN7AdminConsole = New-NsxSecurityGroup -name $SGHZN7AdminConsoleName -IncludeMember (Get-NsxSecurityTag -name $STHZN7AdminConsoleName)
-        $SGHZN7Database = New-NsxSecurityGroup -name $SGHZN7DatabaseName -IncludeMember (Get-NsxSecurityTag -name $STHZN7DatabaseName)
+        $SGHZN7DatabaseName = New-NsxSecurityGroup -name $SGHZN7DatabaseName -IncludeMember (Get-NsxSecurityTag -name $STHZN7DatabaseName)
     
         #Build New Services
     
@@ -460,7 +461,7 @@
         $SVHZN7VIDM2ConnServerLDAP = New-NsxService -name $SVHZN7VIDM2ConnServerLDAPName -protocol $TCP -port $389 -description "Horizon 7 LDAP VMware Identity Manager to View Connection Server" -EnableInheritance
         $SVHZN7VIDM2ConnServerHTTPS = New-NsxService -name $SVHZN7VIDM2ConnServerHTTPSName -protocol $TCP -port $443 -description "Horizon 7 HTTPS VMware Identity Manager to View Connection Server " -EnableInheritance
         $SVHZN7VIDM2VIDMHTTPS = New-NsxService -name $SVHZN7VIDM2VIDMHTTPSName -protocol $TCP -port $443 -description "Horizon 7 HTTPS VMware Identity Manager to VMware Identity Manager" -EnableInheritance
-        $SVHZN7VIDM2VIDMAudit = New-NsxService -name $SVHZN7VIDM2VIDMAuditName -protocol $TCP -port $9300-9400 -description "Horizon 7 VMware Identity Manager to VMware Identity Manager Audit" -EnableInheritance
+        $SVHZN7VIDM2VIDMAudit = New-NsxService -name $SVHZN7VIDM2VIDMAuditName -protocol $TCP -port $93009400 -description "Horizon 7 VMware Identity Manager to VMware Identity Manager Audit" -EnableInheritance
         $SVHZN7VIDM2SMTP = New-NsxService -name $SVHZN7VIDM2SMTPName -protocol $TCP -port $25 -description "Horizon 7 VMware Identity Manager to SMTP Server" -EnableInheritance
         $SVHZN7VIDM2DCLDAP = New-NsxService -name $SVHZN7VIDM2DCLDAPName -protocol $TCP -port $389 -description "Horizon 7 LDAP VMware Identity Manager to Domain Controller" -EnableInheritance
         $SVHZN7VIDM2DCKerberosTCP = New-NsxService -name $SVHZN7VIDM2DCKerberosTCPName -protocol $TCP -port $88 -description "Horizon 7 Kerberos TCP VMware Identity Manager to Domain Controller" -EnableInheritance
@@ -508,52 +509,54 @@
           
         #Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2ConnServerName -source SG-Horizon7-Client,SG-Horizon7-ConnServer -service $SVHZN7Client2ConnServerHTTPName,$SVHZN7Client2ConnServerHTTPSName -action "allow" -AppliedTo SG-Horizon7-Client,SG-Horizon7-ConnServer
         
-Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2ConnServerName -source $SGHZN7ClientName, -destination $SGHZN7ConnServerName -service $SVHZN7Client2ConnServerHTTPName,$SVHZN7Client2ConnServerHTTPSName -action "allow" -AppliedTo $SGHZN7ClientName,$SGHZN7ConnServerName -Position Top
-Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2AgentName -source $SGHZN7ClientName, -destination $SGHZN7VDIName -service $SVHZN7BEClient2AgentTCPName,$SVHZN7BEClient2AgentUDPName,$SVHZN7PCOIPClient2AgentTCPName,$SVHZN7PCOIPClient2AgentUDPName$SVHZN7RDPClient2AgentName,$SVHZN7CDRMMRClient2AgentName,$SVHZN7USBClient2AgentName -action "allow" -AppliedTo $SGHZN7ClientName,$SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
-Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentHTMLName -source "any", -destination $SGHZN7VDIName -service $SVHZN7Browser2AgentHTMLName -action "allow" -AppliedTo $SGHZN7VDIName -Position Top
-Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2VIDMName -source "any", -destination $SGHZN7vIDMName -service $SVHZN7Browser2VIDMName -action "allow" -AppliedTo $SGHZN7vIDMName -Position Top
-Get-NsxFirewallSection $SNHZN7ConnExternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2UAGName -source $SGHZN7ClientName, -destination $SGHZN7UAGName -service $SVHZN7Client2UAGName -action "allow" -AppliedTo $SGHZN7ClientName,$SGHZN7UAGName -Position Top
-Get-NsxFirewallSection $SNHZN7ConnExternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2UAGHTMLName -source "any", -destination $SGHZN7UAGName -service $SVHZN7Browser2UAGHTMLName -action "allow" -AppliedTo $SGHZN7UAGName -Position Top
-Get-NsxFirewallSection $SNHZN7ConnExternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2UAGVIDMName -source "any", -destination $SGHZN7UAGName -service $SVHZN7Browser2UAGVIDMName -action "allow" -AppliedTo $SGHZN7UAGName -Position Top
-Get-NsxFirewallSection $SNHZN7ConnTunneledSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2ConnServerTunnName -source $SGHZN7ClientName, -destination $SGHZN7ConnServerName -service $SVHZN7Client2ConnServerTunnHTTPSName,$SVHZN7Client2ConnServerTunnHTTPName,$SVHZN7BEClient2ConnServerTCPName,$SVHZN7PCOIPClient2ConnServerTCPName,$SVHZN7PCOIPClient2ConnServerUDPName -action "allow" -AppliedTo $SGHZN7ClientName,$SGHZN7ConnServerName -Position Top
-Get-NsxFirewallSection $SNHZN7ConnTunneledSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentTunnName -source "any", -destination $SGHZN7ConnServerName -service $SVHZN7Browser2AgentTunnHTMLName -action "allow" -AppliedTo $SGHZN7ConnServerName -Position Top
-Get-NsxFirewallSection $SNHZN7ConnTunneledSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2VIDMTunnName -source "any", -destination $SGHZN7vIDMName -service $SVHZN7Browser2VIDMTunnName -action "allow" -AppliedTo $SGHZN7vIDMName -Position Top
-Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2ConnServerName -source $SGHZN7VDIName, -destination $SGHZN7ConnServerName -service $SVHZN7Agent2ConnServerEnhancedName,$SVHZN7Agent2ConnServerLegacyName -action "allow" -AppliedTo $SGHZN7ConnServerName -Position Top
-Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2V4HName -source $SGHZN7VDIName, -destination $SGHZN7V4HName -service $SVHZN7Agent2V4HRMIName,$SVHZN7Agent2V4HDMSName -action "allow" -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName,$SGHZN7V4HName -Position Top
-Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNAPPVAgent2APPVMGRName -source $SGHZN7VDIName, -destination $SGHZN7AppVolMgrName -service $SVAPPVAgent2APPVMGRSSLName,$SVAPPVAgent2APPVMGRSTDName -action "allow" -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName,$SGHZN7AppVolMgrName -Position Top
-Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNUEMMGR2UEMFSSMBName -source $SGHZN7VDIName, -destination $SGHZN7UEM_FSName -service $SVUEMMGR2UEMFSSMBName -action "allow" -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName,$SGHZN7UEM_FSName -Position Top
-Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7BlockVDI2VDIName -source $SGHZN7vIDMName -Destination $SGHZN7vIDMName -service "any" -Action deny -AppliedTo $SGHZN7VDIName
-Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServ2AgentTunnName -source $SGHZN7ConnServerName, -destination $SGHZN7VDIName -service $SVHZN7BEConnServ2AgentTunnName,$SVHZN7PCOIPConnServ2AgentTunnTCPName,$SVHZN7PCOIPConnServ2AgentTunnUDPName,$SVHZN7RDPConnServer2AgentTunnName,$SVHZN7CDRMMRConnServer2AgentTunnName,$SVHZN7USBClient2AgentUSBTunnName -action "allow" -AppliedTo $SGHZN7ConnServerName,$SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2vCenterName -source $SGHZN7ConnServerName, -destination $SGHZN7vCenterMGMTName -service $SVHZN7ConnServer2vCenterSOAPName -action "allow" -AppliedTo $SGHZN7ConnServerName,$SGHZN7vCenterMGMTName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2CompName -source $SGHZN7ConnServerName, -destination $SGHZN7ComposerName -service $SVHZN7ConnServer2CompSOAPName -action "allow" -AppliedTo $SGHZN7ConnServerName,$SGHZN7ComposerName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2ConnServerName -source $SGHZN7ConnServerName, -destination $SGHZN7ConnServerName -service $SVHZN7ConnServer2ConnServerJMSLegacyName,$SVHZN7ConnServer2ConnServerJMSSSLName,$SVHZN7CPALDAPREPLName,$SVHZN7CPALDAPREPLSSLName,$SVHZCPAInterPodVIPAName,$SVHZN7ConnServerInstallReplicaName -action "allow" -AppliedTo $SGHZN7ConnServerName,$SGHZN7ConnServerName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2EnrollmentName -source $SGHZN7ConnServerName, -destination $SGHZN7EnrollServerName -service $SVHZN7ConnServer2EnrollmentName -action "allow" -AppliedTo $SGHZN7ConnServerName,$SGHZN7EnrollServerName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2VIDMName -source $SGHZN7ConnServerName, -destination $SGHZN7vIDMName -service $SVHZN7ConnServer2VIDMName -action "allow" -AppliedTo $SGHZN7ConnServerName,$SGHZN7vIDMName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2V4HName -source $SGHZN7ConnServerName, -destination $SGHZN7V4HName -service $SVHZN7ConnServer2V4HRMIName,$SVHZN7ConnServer2V4HBMSName,$SVHZN7ConnServer2V4HCMSName -action "allow" -AppliedTo $SGHZN7ConnServerName,$SGHZN7V4HName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer22FAMGRName -source $SGHZN7ConnServerName, -destination $SGHZN7AirWatchName -service $SVHZN7ConnServer22FAMGRName -action "allow" -AppliedTo $SGHZN7ConnServerName,$SGHZN7AirWatchName -Position Top
-Get-NsxFirewallSection $SNHZN7InfravCenterViewCompSectionName  | New-NsxFirewallRule -Name $RNvCenter2ESXiName -source $SGHZN7vCenterVDI_RDSHName, -destination $IPHorizon7VDIESXi -service $SVvCenter2ESXiSOAPName -action "allow" -AppliedTo $SGHZN7vCenterVDI_RDSHName,$IPHorizon7VDIESXi -Position Top
-Get-NsxFirewallSection $SNHZN7InfravCenterViewCompSectionName  | New-NsxFirewallRule -Name $RNHZN7Comp2vCenterName -source $SGHZN7ComposerName, -destination $SGHZN7vCenterVDI_RDSHName -service $SVHZN7Comp2vCenterSOAPName -action "allow" -AppliedTo $SGHZN7ComposerName,$SGHZN7vCenterVDI_RDSHName -Position Top
-Get-NsxFirewallSection $SNHZN7InfravCenterViewCompSectionName  | New-NsxFirewallRule -Name $RNHZN7Comp2ESXiName -source $SGHZN7ComposerName, -destination $IPHorizon7VDIESXi -service $SVHZN7Comp2ESXiSOAPName -action "allow" -AppliedTo $SGHZN7ComposerName,$IPHorizon7VDIESXi -Position Top
-Get-NsxFirewallSection $SNHZN7InfraUAGSectionName  | New-NsxFirewallRule -Name $RNHZN7UAG2ConnServerName -source $SGHZN7UAGName, -destination $SGHZN7ConnServerName -service $SVHZN7UAG2ConnServerLoginName -action "allow" -AppliedTo $SGHZN7UAGName,$SGHZN7ConnServerName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraUAGSectionName  | New-NsxFirewallRule -Name $RNHZN7UAG2AgentName -source $SGHZN7UAGName, -destination $SGHZN7VDIName -service $SVHZN7BEUAG2AgentTCPName,$SVHZN7BEUAG2AgentUDPName,$SVHZN7PCOIP2AgentTCPName,$SVHZN7PCOIP2AgentUDPName,$SVHZN7RDPUAG2AgentName,$SVHZN7CDRMMRUAG2AgentName,$SVHZN7USBUAG2AgentName,$SVHZN7UAG2AgentName,$SVHZN7UAG22FAMGRName -action "allow" -AppliedTo $SGHZN7UAGName,$SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
-Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2ConnServerName -source $SGHZN7vIDMName, -destination $SGHZN7ConnServerName -service $SVHZN7VIDM2ConnServerLDAPName,$SVHZN7VIDM2ConnServerHTTPSName -action "allow" -AppliedTo $SGHZN7vIDMName,$SGHZN7ConnServerName -Position Top
-Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2VIDMName -source $SGHZN7vIDMName, -destination $SGHZN7vIDMName -service $SVHZN7VIDM2VIDMHTTPSName,$SVHZN7VIDM2VIDMAuditName -action "allow" -AppliedTo $SGHZN7vIDMName,$SGHZN7vIDMName -Position Top
-Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2SMTPName -source $SGHZN7vIDMName, -destination $SGHZN7SMTPName -service $SVHZN7VIDM2SMTPName -action "allow" -AppliedTo $SGHZN7vIDMName,$SGHZN7SMTPName -Position Top
-Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2DCName -source $SGHZN7vIDMName, -destination $SGHZN7DomainCtrlName -service $SVHZN7VIDM2DCLDAPName,$SVHZN7VIDM2DCKerberosTCPName,$SVHZN7VIDM2DCKerberosUDPName,$SVHZN7VIDM2DCKerberosPWDTCPName,$SVHZN7VIDM2DCKerberosPWDUDPName -action "allow" -AppliedTo $SGHZN7vIDMName,$SGHZN7DomainCtrlName -Position Top
-Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2DNSName -source $SGHZN7vIDMName, -destination $SGHZN7DNSName -service $SVHZN7VIDM2DNSTCPName,$SVHZN7VIDM2DNSUDPName -action "allow" -AppliedTo $SGHZN7vIDMName,$SGHZN7DNSName -Position Top
-Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2CTXBName -source $SGHZN7vIDMName, -destination $SGHZN7CitrixName -service $SVHZN7VIDM2CTXBSTDName,$SVHZN7VIDM2CTXSSLName -action "allow" -AppliedTo $SGHZN7vIDMName,$SGHZN7CitrixName -Position Top
-Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2ThinAppFSName -source $SGHZN7vIDMName, -destination $SGHZN7ThinApp_FSName -service $SVHZN7VIDM2ThinAppFSSMBName -action "allow" -AppliedTo $SGHZN7vIDMName,$SGHZN7ThinApp_FSName -Position Top
-Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2UpgradeServerName -source $SGHZN7vIDMName, -destination $IPHorizon7UpdateServer -service $SVHZN7VIDM2UpgradeServerName -action "allow" -AppliedTo $SGHZN7vIDMName,$IPHorizon7UpdateServer -Position Top
-Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM22FAMGRName -source $SGHZN7vIDMName, -destination $SGHZN7AirWatchName -service $SVHZN7VIDM22FAMGRName -action "allow" -AppliedTo $SGHZN7vIDMName,$SGHZN7AirWatchName -Position Top
-Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2AirWatchName -source $SGHZN7vIDMName, -destination $SGHZN7AirWatchName -service $SVHZN7VIDM2AirWatchRESTAPIName -action "allow" -AppliedTo $SGHZN7vIDMName,$SGHZN7AirWatchName -Position Top
-Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2Name -source $SGHZN7vIDMName, -destination $SGHZN7DatabaseName -service $SVHZN7VIDM2MSSQLName,$SVHZN7VIDM2PostgreSQLName,$SVHZN7VIDM2OracleName -action "allow" -AppliedTo $SGHZN7vIDMName,$SGHZN7DatabaseName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraAppVolMgrSectionName  | New-NsxFirewallRule -Name $RNHZN7APPVMGR2vCenterName -source $SGHZN7AppVolMgrName, -destination $SGHZN7vCenterVDI_RDSHName -service $SVHZN7APPVMGR2vCenterSOAPName -action "allow" -AppliedTo $SGHZN7AppVolMgrName,$SGHZN7vCenterVDI_RDSHName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraAppVolMgrSectionName  | New-NsxFirewallRule -Name $RNHZN7APPVMGR2ESXiName -source $SGHZN7AppVolMgrName, -destination $IPHorizon7VDIESXi -service $SVHZN7APPVMGR2ESXiName -action "allow" -AppliedTo $SGHZN7AppVolMgrName,$IPHorizon7VDIESXi -Position Top
-Get-NsxFirewallSection $SNHZN7InfraAppVolMgrSectionName  | New-NsxFirewallRule -Name $RNHZN7APPVMGR2Name -source $SGHZN7AppVolMgrName, -destination $SGHZN7DatabaseName -service $SVHZN7APPVMGR2MSSQLName -action "allow" -AppliedTo $SGHZN7AppVolMgrName,$SGHZN7DatabaseName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2ConnServerName -source $SGHZN7V4HName, -destination $SGHZN7ConnServerName -service $SVV4H2ConnServerRMIName,$SVV4H2ConnServerBMSName,$SVV4H2ConnServerCMSName -action "allow" -AppliedTo $SGHZN7V4HName,$SGHZN7ConnServerName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2AgentName -source $SGHZN7V4HName, -destination $SGHZN7vCenterMGMTName -service $SVV4H2AgentRMIName,$SVV4H2AgentDMSName -action "allow" -AppliedTo $SGHZN7V4HName,$SGHZN7vCenterMGMTName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2UAGMonitorName -source $SGHZN7V4HName, -destination $SGHZN7UAGName -service $SVV4H2UAGMonitorName -action "allow" -AppliedTo $SGHZN7V4HName,$SGHZN7UAGName -Position Top
-Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2APPVMGRMonitorName -source $SGHZN7V4HName, -destination $SGHZN7AppVolMgrName -service $SVV4H2APPVMGRMonitorName -action "allow" -AppliedTo $SGHZN7V4HName,$SGHZN7AppVolMgrName -Position Top
-Get-NsxFirewallSection $SNHHZN7InfraMgmtSectionName  | New-NsxFirewallRule -Name $RNHZN7Admin2Name -source $SGHZN7AdminConsoleName, -destination $SGHZN7ConnServerName -service $SVHZN7Admin2ConnServerName,$SVHZN7Admin2vCenterName,$SVHZN7Admin2APPVMGRName,$SVHZN7Admin2VIDMName -action "allow" -AppliedTo $SGHZN7AdminConsoleName,$SGHZN7ConnServerName -Position Top
-Get-NsxFirewallSection $SNHHZN7InfraMgmtSectionName  | New-NsxFirewallRule -Name $RNHZN7Admin2UAGName -source $SGHZN7AdminConsoleName, -destination $SGHZN7V4HName -service $SVHZN7Admin2V4HName -action "allow" -AppliedTo $SGHZN7AdminConsoleName,$SGHZN7V4HName -Position Top
-Get-NsxFirewallSection $SNHHZN7InfraMgmtSectionName  | New-NsxFirewallRule -Name $RNHZN7Admin2VIDMName -source $SGHZN7AdminConsoleName, -destination $SGHZN7UAGName -service $SVHZN7Admin2UAGName -action "allow" -AppliedTo $SGHZN7AdminConsoleName,$SGHZN7UAGName -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2ConnServerName -source $SGHZN7ClientName -destination $SGHZN7ConnServerName -service $SVHZN7Client2ConnServerHTTPName,$SVHZN7Client2ConnServerHTTPSName -action allow -AppliedTo $SGHZN7ClientName,$SGHZN7ConnServerName -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2AgentName -source $SGHZN7ClientName -destination $SGHZN7VDIName -service $SVHZN7BEClient2AgentTCPName,$SVHZN7BEClient2AgentUDPName,$SVHZN7PCOIPClient2AgentTCPName,$SVHZN7PCOIPClient2AgentUDPName$SVHZN7RDPClient2AgentName,$SVHZN7CDRMMRClient2AgentName,$SVHZN7USBClient2AgentName -action allow -AppliedTo $SGHZN7ClientName,$SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentHTMLName -source any -destination $SGHZN7VDIName -service $SVHZN7Browser2AgentHTMLName -action allow -AppliedTo $SGHZN7VDIName -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2VIDMName -source any -destination $SGHZN7vIDMName -service $SVHZN7Browser2VIDMName -action allow -AppliedTo $SGHZN7vIDMName -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnExternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2UAGName -source $SGHZN7ClientName -destination $SGHZN7UAGName -service $SVHZN7Client2UAGName -action allow -AppliedTo $SGHZN7ClientName,$SGHZN7UAGName -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnExternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2UAGHTMLName -source any -destination $SGHZN7UAGName -service $SVHZN7Browser2UAGHTMLName -action allow -AppliedTo $SGHZN7UAGName -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnExternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2UAGVIDMName -source any -destination $SGHZN7UAGName -service $SVHZN7Browser2UAGVIDMName -action allow -AppliedTo $SGHZN7UAGName -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnTunneledSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2ConnServerTunnName -source $SGHZN7ClientName -destination $SGHZN7ConnServerName -service $SVHZN7Client2ConnServerTunnHTTPSName,$SVHZN7Client2ConnServerTunnHTTPName,$SVHZN7BEClient2ConnServerTCPName,$SVHZN7PCOIPClient2ConnServerTCPName,$SVHZN7PCOIPClient2ConnServerUDPName -action allow -AppliedTo $SGHZN7ClientName,$SGHZN7ConnServerName -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnTunneledSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentTunnName -source any -destination $SGHZN7ConnServerName -service $SVHZN7Browser2AgentTunnHTMLName -action allow -AppliedTo $SGHZN7ConnServerName -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnTunneledSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2VIDMTunnName -source any -destination $SGHZN7vIDMName -service $SVHZN7Browser2VIDMTunnName -action allow -AppliedTo $SGHZN7vIDMName -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2ConnServerName -source $SGHZN7VDIName -destination $SGHZN7ConnServerName -service $SVHZN7Agent2ConnServerEnhancedName,$SVHZN7Agent2ConnServerLegacyName -action allow -AppliedTo $SGHZN7ConnServerName -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2V4HName -source $SGHZN7VDIName -destination $SGHZN7V4HName -service $SVHZN7Agent2V4HRMIName,$SVHZN7Agent2V4HDMSName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName,$SGHZN7V4HName -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNAPPVAgent2APPVMGRName -source $SGHZN7VDIName -destination $SGHZN7AppVolMgrName -service $SVAPPVAgent2APPVMGRSSLName,$SVAPPVAgent2APPVMGRSTDName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName,$SGHZN7AppVolMgrName -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNUEMMGR2UEMFSSMBName -source $SGHZN7VDIName -destination $SGHZN7UEM_FSName -service $SVUEMMGR2UEMFSSMBName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName,$SGHZN7UEM_FSName -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7BlockVDI2VDIName -source $SGHZN7vIDMName -Destination $SGHZN7vIDMName -service any -Action deny -AppliedTo $SGHZN7VDIName
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServ2AgentTunnName -source $SGHZN7ConnServerName -destination $SGHZN7VDIName -service $SVHZN7BEConnServ2AgentTunnName,$SVHZN7PCOIPConnServ2AgentTunnTCPName,$SVHZN7PCOIPConnServ2AgentTunnUDPName,$SVHZN7RDPConnServer2AgentTunnName,$SVHZN7CDRMMRConnServer2AgentTunnName,$SVHZN7USBClient2AgentUSBTunnName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2vCenterName -source $SGHZN7ConnServerName -destination $SGHZN7vCenterMGMTName -service $SVHZN7ConnServer2vCenterSOAPName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7vCenterMGMTName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2CompName -source $SGHZN7ConnServerName -destination $SGHZN7ComposerName -service $SVHZN7ConnServer2CompSOAPName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7ComposerName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2ConnServerName -source $SGHZN7ConnServerName -destination $SGHZN7ConnServerName -service $SVHZN7ConnServer2ConnServerJMSLegacyName,$SVHZN7ConnServer2ConnServerJMSSSLName,$SVHZN7CPALDAPREPLName,$SVHZN7CPALDAPREPLSSLName,$SVHZCPAInterPodVIPAName,$SVHZN7ConnServerInstallReplicaName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7ConnServerName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2EnrollmentName -source $SGHZN7ConnServerName -destination $SGHZN7EnrollServerName -service $SVHZN7ConnServer2EnrollmentName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7EnrollServerName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2VIDMName -source $SGHZN7ConnServerNam -destination $SGHZN7vIDMName -service $SVHZN7ConnServer2VIDMName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7vIDMName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2V4HName -source $SGHZN7ConnServerName -destination $SGHZN7V4HName -service $SVHZN7ConnServer2V4HRMIName,$SVHZN7ConnServer2V4HBMSName,$SVHZN7ConnServer2V4HCMSName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7V4HName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer22FAMGRName -source $SGHZN7ConnServerName -destination $SGHZN7AirWatchName -service $SVHZN7ConnServer22FAMGRName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7AirWatchName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravCenterViewCompSectionName  | New-NsxFirewallRule -Name $RNvCenter2ESXiName -source $SGHZN7vCenterVDI_RDSHName -destination $IPHorizon7VDIESXi -service $SVvCenter2ESXiSOAPName -action allow -AppliedTo $SGHZN7vCenterVDI_RDSHName,$IPHorizon7VDIESXi -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravCenterViewCompSectionName  | New-NsxFirewallRule -Name $RNHZN7Comp2vCenterName -source $SGHZN7ComposerName -destination $SGHZN7vCenterVDI_RDSHName -service $SVHZN7Comp2vCenterSOAPName -action allow -AppliedTo $SGHZN7ComposerName,$SGHZN7vCenterVDI_RDSHName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravCenterViewCompSectionName  | New-NsxFirewallRule -Name $RNHZN7Comp2ESXiName -source $SGHZN7ComposerName -destination $IPHorizon7VDIESXi -service $SVHZN7Comp2ESXiSOAPName -action allow -AppliedTo $SGHZN7ComposerName,$IPHorizon7VDIESXi -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraUAGSectionName  | New-NsxFirewallRule -Name $RNHZN7UAG2ConnServerName -source $SGHZN7UAGName -destination $SGHZN7ConnServerName -service $SVHZN7UAG2ConnServerLoginName -action allow -AppliedTo $SGHZN7UAGName,$SGHZN7ConnServerName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraUAGSectionName  | New-NsxFirewallRule -Name $RNHZN7UAG2AgentName -source $SGHZN7UAGName -destination $SGHZN7VDIName -service $SVHZN7BEUAG2AgentTCPName,$SVHZN7BEUAG2AgentUDPName,$SVHZN7PCOIP2AgentTCPName,$SVHZN7PCOIP2AgentUDPName,$SVHZN7RDPUAG2AgentName,$SVHZN7CDRMMRUAG2AgentName,$SVHZN7USBUAG2AgentName,$SVHZN7UAG2AgentName,$SVHZN7UAG22FAMGRName -action allow -AppliedTo $SGHZN7UAGName,$SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2ConnServerName -source $SGHZN7vIDMNam -destination $SGHZN7ConnServerName -service $SVHZN7VIDM2ConnServerLDAPName,$SVHZN7VIDM2ConnServerHTTPSName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7ConnServerName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2VIDMName -source $SGHZN7vIDMName -destination $SGHZN7vIDMName -service $SVHZN7VIDM2VIDMHTTPSName,$SVHZN7VIDM2VIDMAuditName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7vIDMName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2SMTPName -source $SGHZN7vIDMName -destination $SGHZN7SMTPName -service $SVHZN7VIDM2SMTPName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7SMTPName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2DCName -source $SGHZN7vIDMName -destination $SGHZN7DomainCtrlName -service $SVHZN7VIDM2DCLDAPName,$SVHZN7VIDM2DCKerberosTCPName,$SVHZN7VIDM2DCKerberosUDPName,$SVHZN7VIDM2DCKerberosPWDTCPName,$SVHZN7VIDM2DCKerberosPWDUDPName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7DomainCtrlName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2DNSName -source $SGHZN7vIDMName -destination $SGHZN7DNSName -service $SVHZN7VIDM2DNSTCPName,$SVHZN7VIDM2DNSUDPName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7DNSName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2CTXBName -source $SGHZN7vIDMName -destination $SGHZN7CitrixName -service $SVHZN7VIDM2CTXBSTDName,$SVHZN7VIDM2CTXSSLName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7CitrixName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2ThinAppFSName -source $SGHZN7vIDMName -destination $SGHZN7ThinApp_FSName -service $SVHZN7VIDM2ThinAppFSSMBName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7ThinApp_FSName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2UpgradeServerName -source $SGHZN7vIDMName -destination $IPHorizon7UpdateServer -service $SVHZN7VIDM2UpgradeServerName -action allow -AppliedTo $SGHZN7vIDMName,$IPHorizon7UpdateServer -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM22FAMGRName -source $SGHZN7vIDMName -destination $SGHZN7AirWatchName -service $SVHZN7VIDM22FAMGRName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7AirWatchName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2AirWatchName -source $SGHZN7vIDMName -destination $SGHZN7AirWatchName -service $SVHZN7VIDM2AirWatchRESTAPIName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7AirWatchName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2Name -source $SGHZN7vIDMName -destination $SGHZN7DatabaseName -service $SVHZN7VIDM2MSSQLName,$SVHZN7VIDM2PostgreSQLName,$SVHZN7VIDM2OracleName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7DatabaseName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraAppVolMgrSectionName  | New-NsxFirewallRule -Name $RNHZN7APPVMGR2vCenterName -source $SGHZN7AppVolMgrName -destination $SGHZN7vCenterVDI_RDSHName -service $SVHZN7APPVMGR2vCenterSOAPName -action allow -AppliedTo $SGHZN7AppVolMgrName,$SGHZN7vCenterVDI_RDSHName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraAppVolMgrSectionName  | New-NsxFirewallRule -Name $RNHZN7APPVMGR2ESXiName -source $SGHZN7AppVolMgrName -destination $IPHorizon7VDIESXi -service $SVHZN7APPVMGR2ESXiName -action allow -AppliedTo $SGHZN7AppVolMgrName,$IPHorizon7VDIESXi -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraAppVolMgrSectionName  | New-NsxFirewallRule -Name $RNHZN7APPVMGR2Name -source $SGHZN7AppVolMgrName -destination $SGHZN7DatabaseName -service $SVHZN7APPVMGR2MSSQLName -action allow -AppliedTo $SGHZN7AppVolMgrName,$SGHZN7DatabaseName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2ConnServerName -source $SGHZN7V4HName -destination $SGHZN7ConnServerName -service $SVV4H2ConnServerRMIName,$SVV4H2ConnServerBMSName,$SVV4H2ConnServerCMSName -action allow -AppliedTo $SGHZN7V4HName,$SGHZN7ConnServerName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2AgentName -source $SGHZN7V4HName -destination $SGHZN7vCenterMGMTName -service $SVV4H2AgentRMIName,$SVV4H2AgentDMSName -action allow -AppliedTo $SGHZN7V4HName,$SGHZN7vCenterMGMTName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2UAGMonitorName -source $SGHZN7V4HName -destination $SGHZN7UAGName -service $SVV4H2UAGMonitorName -action allow -AppliedTo $SGHZN7V4HName,$SGHZN7UAGName -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2APPVMGRMonitorName -source $SGHZN7V4HName -destination $SGHZN7AppVolMgrName -service $SVV4H2APPVMGRMonitorName -action allow -AppliedTo $SGHZN7V4HName,$SGHZN7AppVolMgrName -Position Top
+        Get-NsxFirewallSection $SNHHZN7InfraMgmtSectionName  | New-NsxFirewallRule -Name $RNHZN7Admin2Name -source $SGHZN7AdminConsoleName -destination $SGHZN7ConnServerName -service $SVHZN7Admin2ConnServerName,$SVHZN7Admin2vCenterName,$SVHZN7Admin2APPVMGRName,$SVHZN7Admin2VIDMName -action allow -AppliedTo $SGHZN7AdminConsoleName,$SGHZN7ConnServerName -Position Top
+        Get-NsxFirewallSection $SNHHZN7InfraMgmtSectionName  | New-NsxFirewallRule -Name $RNHZN7Admin2UAGName -source $SGHZN7AdminConsoleName -destination $SGHZN7V4HName -service $SVHZN7Admin2V4HName -action allow -AppliedTo $SGHZN7AdminConsoleName,$SGHZN7V4HName -Position Top
+        Get-NsxFirewallSection $SNHHZN7InfraMgmtSectionName  | New-NsxFirewallRule -Name $RNHZN7Admin2VIDMName -source $SGHZN7AdminConsoleName -destination $SGHZN7UAGName -service $SVHZN7Admin2UAGName -action allow -AppliedTo $SGHZN7AdminConsoleName,$SGHZN7UAGName -Position Top
+
+    
