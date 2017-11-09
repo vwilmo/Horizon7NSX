@@ -1,282 +1,283 @@
 ﻿#Script
     param (
-        ##Creating Horizon 7 Groupings
+            ##Creating Horizon 7 Groupings
+            
+            #Security Groups
+            $SGHZN7ClientName = "SG-Horizon7-Client",
+            $SGHZN7ConnServerName = "SG-Horizon7-ConnServer",
+            $SGHZN7vIDMName = "SG-Horizon7-vIDM",
+            $SGHZN7UAGName = "SG-Horizon7-UAG",
+            $SGHZN7VDIName = "SG-Horizon7-VDI",
+            $SGHZN7RDSHostName = "SG-Horizon7-RDSHost",
+            $SGHZN7EnrollServerName = "SG-Horizon7-EnrollServer",
+            $SGHZN7AppVolMgrName = "SG-Horizon7-AppVolMgr",
+            $SGHZN7vCenterMGMTName = "SG-Horizon7-vCenterMgmt",
+            $SGHZN7vCenterVDI_RDSHName = "SG-Horizon7-vCenterVDI_RDSH",
+            $SGHZN7UEM_FSName = "SG-Horizon7-UEM_FS",
+            $SGHZN7UEM_MgrName = "SG-Horizon7-UEM_Mgr",
+            $SGHZN7ComposerName = "SG-Horizon7-Composer",
+            $SGHZN7DomainCtrlName = "SG-Horizon7-DomainCtrl",
+            $SGHZN7DNSName = "SG-Horizon7-DNS",
+            $SGHZN7SMTPName = "SG-Horizon7-SMTP",
+            $SGHZN7CitrixName = "SG-Horizon7-Citrix",
+            $SGHZN7ThinApp_FSName = "SG-Horizon7-ThinApp_FS",
+            $SGHZN72FAName = "SG-Horizon7-2FA",
+            $SGHZN7AirWatchName = "SG-Horizon7-AirWatch",
+            $SGHZN7V4HName = "SG-Horizon7-V4H",
+            $SGHZN7AdConName = "SG-Horizon7-AdCon",
+            $SGHZN7DatabaseName = "SG-Horizon7-Database",
+            
+            #Security Tags
+            $STHZN7ClientName = "ST-Horizon7-Client",
+            $STHZN7ConnServerName = "ST-Horizon7-ConnServer",
+            $STHZN7vIDMName = "ST-Horizon7-vIDM",
+            $STHZN7UAGName = "ST-Horizon7-UAG",
+            $STHZN7VDIName = "ST-Horizon7-VDI",
+            $STHZN7RDSHostName = "ST-Horizon7-RDSHost",
+            $STHZN7EnrollServerName = "ST-Horizon7-EnrollServer",
+            $STHZN7AppVolMgrName = "ST-Horizon7-AppVolMgr",
+            $STHZN7vCenterMGMTName = "ST-Horizon7-vCenterMgmt",
+            $STHZN7vCenterVDI_RDSHName = "ST-Horizon7-vCenterVDI_RDSH",
+            $STHZN7UEM_FSName = "ST-Horizon7-UEM_FS",
+            $STHZN7UEM_MgrName = "ST-Horizon7-UEM_Mgr",
+            $STHZN7ComposerName = "ST-Horizon7-Composer",
+            $STHZN7DomainCtrlName = "ST-Horizon7-DomainCtrl",
+            $STHZN7DNSName = "ST-Horizon7-DNS",
+            $STHZN7SMTPName = "ST-Horizon7-SMTP",
+            $STHZN7CitrixName = "ST-Horizon7-Citrix",
+            $STHZN7ThinApp_FSName = "ST-Horizon7-ThinApp_FS",
+            $STHZN72FAName = "ST-Horizon7-2FA",
+            $STHZN7AirWatchName = "ST-Horizon7-AirWatch",
+            $STHZN7V4HName = "ST-Horizon7-V4H",
+            $STHZN7AdConName = "ST-Horizon7-AdCon",
+            $STHZN7DatabaseName = "ST-Horizon7-Database",
+            
+            #DFW Firewall Section Names
+            $SNHZN7ConnExternalSectionName = "Horizon 7 Connectivity - External Connections",
+            $SNHZN7ConnTunneledSectionName = "Horizon 7 Connectivity - Tunneled Connections",
+            $SNHZN7ConnInternalSectionName = "Horizon 7 Connectivity - Internal Connections",
+            $SNHZN7DesktopVDI_RDSHSectionName = "Horizon 7 Desktops - VDI or RDS Host",
+            $SNHZN7InfraConnServerSectionName = "Horizon 7 Infrastructure - View Connection Server",
+            $SNHZN7InfravCenterViewCompSectionName = "Horizon 7 Infrastructure - vCenter Server and View Composer",
+            $SNHZN7InfraUAGSectionName = "Horizon 7 Infrastructure - Unified Access Gateway",
+            $SNHZN7InfravIDMSectionName = "Horizon 7 Infrastructure - VMware Identity Manager",
+            $SNHZN7InfraAppVolMgrSectionName = "Horizon 7 Infrastructure - App Volumes Manager",
+            $SNHZN7InfraV4HSectionName = "Horizon 7 Infrastructure - vRealize Operations for Horizon",
+            $SNHZN7InfraMgmtSectionName = "Horizon 7 Infrastructure - Management",
         
-        #Security Groups
-        $SGHZN7ClientName = "SG-Horizon7-Client",
-        $SGHZN7ConnServerName = "SG-Horizon7-ConnServer",
-        $SGHZN7vIDMName = "SG-Horizon7-vIDM",
-        $SGHZN7UAGName = "SG-Horizon7-UAG",
-        $SGHZN7VDIName = "SG-Horizon7-VDI",
-        $SGHZN7RDSHostName = "SG-Horizon7-RDSHost",
-        $SGHZN7EnrollServerName = "SG-Horizon7-EnrollServer",
-        $SGHZN7AppVolMgrName = "SG-Horizon7-AppVolMgr",
-        $SGHZN7vCenterMGMTName = "SG-Horizon7-vCenterMgmt",
-        $SGHZN7vCenterVDI_RDSHName = "SG-Horizon7-vCenterVDI_RDSH",
-        $SGHZN7UEM_FSName = "SG-Horizon7-UEM_FS",
-        $SGHZN7UEM_MgrName = "SG-Horizon7-UEM_Mgr",
-        $SGHZN7ComposerName = "SG-Horizon7-Composer",
-        $SGHZN7DomainCtrlName = "SG-Horizon7-DomainCtrl",
-        $SGHZN7DNSName = "SG-Horizon7-DNS",
-        $SGHZN7SMTPName = "SG-Horizon7-SMTP",
-        $SGHZN7CitrixName = "SG-Horizon7-Citrix",
-        $SGHZN7ThinApp_FSName = "SG-Horizon7-ThinApp_FS",
-        $SGHZN72FAName = "SG-Horizon7-2FA",
-        $SGHZN7AirWatchName = "SG-Horizon7-AirWatch",
-        $SGHZN7V4HName = "SG-Horizon7-V4H",
-        $SGHZN7AdminConsoleName = "SG-Horizon7-AdminConsole",
-        $SGHZN7DatabaseName = "SG-Horizon7-Database",
-        
-        #Security Tags
-        $STHZN7ClientName = "ST-Horizon7-Client",
-        $STHZN7ConnServerName = "ST-Horizon7-ConnServer",
-        $STHZN7vIDMName = "ST-Horizon7-vIDM",
-        $STHZN7UAGName = "ST-Horizon7-UAG",
-        $STHZN7VDIName = "ST-Horizon7-VDI",
-        $STHZN7RDSHostName = "ST-Horizon7-RDSHost",
-        $STHZN7EnrollServerName = "ST-Horizon7-EnrollServer",
-        $STHZN7AppVolMgrName = "ST-Horizon7-AppVolMgr",
-        $STHZN7vCenterMGMTName = "ST-Horizon7-vCenterMgmt",
-        $STHZN7vCenterVDI_RDSHName = "ST-Horizon7-vCenterVDI_RDSH",
-        $STHZN7UEM_FSName = "ST-Horizon7-UEM_FS",
-        $STHZN7UEM_MgrName = "ST-Horizon7-UEM_Mgr",
-        $STHZN7ComposerName = "ST-Horizon7-Composer",
-        $STHZN7DomainCtrlName = "ST-Horizon7-DomainCtrl",
-        $STHZN7DNSName = "ST-Horizon7-DNS",
-        $STHZN7SMTPName = "ST-Horizon7-SMTP",
-        $STHZN7CitrixName = "ST-Horizon7-Citrix",
-        $STHZN7ThinApp_FSName = "ST-Horizon7-ThinApp_FS",
-        $STHZN72FAName = "ST-Horizon7-2FA",
-        $STHZN7AirWatchName = "ST-Horizon7-AirWatch",
-        $STHZN7V4HName = "ST-Horizon7-V4H",
-        $STHZN7AdminConsoleName = "ST-Horizon7-AdminConsole",
-        $STHZN7DatabaseName = "ST-Horizon7-Database",
-        
-        #DFW Firewall Section Names
-        $SNHZN7ConnExternalSectionName = "Horizon 7 Connectivity - External Connections",
-        $SNHZN7ConnTunneledSectionName = "Horizon 7 Connectivity - Tunneled Connections",
-        $SNHZN7ConnInternalSectionName = "Horizon 7 Connectivity - Internal Connections",
-        $SNHZN7DesktopVDI_RDSHSectionName = "Horizon 7 Desktops - VDI or RDS Host",
-        $SNHZN7InfraConnServerSectionName = "Horizon 7 Infrastructure - View Connection Server",
-        $SNHZN7InfravCenterViewCompSectionName = "Horizon 7 Infrastructure - vCenter Server and View Composer",
-        $SNHZN7InfraUAGSectionName = "Horizon 7 Infrastructure - Unified Access Gateway",
-        $SNHZN7InfravIDMSectionName = "Horizon 7 Infrastructure - VMware Identity Manager",
-        $SNHZN7InfraAppVolMgrSectionName = "Horizon 7 Infrastructure - App Volumes Manager",
-        $SNHZN7InfraV4HSectionName = "Horizon 7 Infrastructure - vRealize Operations for Horizon",
-        $SNHZN7InfraMgmtSectionName = "Horizon 7 Infrastructure - Management",
-    
-        #DFW Rule Names
-        
-        $RNHZN7Client2ConnServerName = "Internal - Horizon Client to View Connection Server",
-        $RNHZN7Client2AgentName = "Internal - Horizon Client to Horizon Agent",
-        $RNHZN7Browser2AgentHTMLName = "Internal - Browser to Horizon Agent HTML",
-        $RNHZN7Browser2VIDMName = "Internal - Browser to vIDM",
-        $RNHZN7Client2UAGName = "External - Horizon Client to UAG",
-        $RNHZN7Browser2UAGHTMLName = "External - Browser to UAG HTML",
-        $RNHZN7Browser2UAGVIDMName = "External - Browser to UAG VIDM",
-        $RNHZN7Client2ConnServerTunnName = "Tunneled - Horizon Client to View Connection Server HTTPS",
-        $RNHZN7Browser2AgentTunnName = "Tunneled - Browser to View Connection Server",
-        $RNHZN7Browser2VIDMTunnName = "Tunneled - Browser to VIDM",
-        $RNHZN7Agent2ConnServerName = "Desktops - Horizon Agent to View Connection Server JMS",
-        $RNHZN7Agent2V4HName = "Desktops - Horizon Agent to V4H",
-        $RNAPPVAgent2APPVMGRName = "Desktops - App Volumes Agent to App Volumes Manager",
-        $RNUEMMGR2UEMFSSMBName = "Desktops - UEM Flex Engine to UEM File Servers",
-        $RNHZN7ConnServ2AgentTunnName = "Infrastructure - View Connection Server to Horizon Agent Tunneled",
-        $RNHZN7ConnServer2vCenterName = "Infrastructure - View Connection Server to vCenter Server",
-        $RNHZN7ConnServer2CompName = "Infrastructure - View Connection Server to View Composer",
-        $RNHZN7ConnServer2ConnServerName = "Infrastructure - View Connection Server to View Connection Server",
-        $RNHZN7ConnServer2EnrollmentName = "Infrastructure - View Connection Server to Enrollment Server",
-        $RNHZN7ConnServer2VIDMName = "Infrastructure - View Connection Server to VIDM",
-        $RNHZN7ConnServer2V4HName = "Infrastructure - View Connection Server to V4H",
-        $RNHZN7ConnServer22FAMGRName = "Infrastructure - View Connection Server to 2FA Manager",
-        $RNvCenter2ESXiName = "Infrastructure - vCenter Server to ESXi",
-        $RNHZN7Comp2vCenterName = "Infrastructure - View Composer to vCenter Server",
-        $RNHZN7Comp2ESXiName = "Infrastructure - View Composer to ESXi",
-        $RNHZN7UAG2ConnServerName = "Infrastructure - UAG to View Connection Server",
-        $RNHZN7UAG2AgentName = "Infrastructure - UAG to Horizon Agent",
-        $RNHZN7VIDM2ConnServerName = "Infrastructure - VIDM to View Connection Server",
-        $RNHZN7VIDM2VIDMName = "Infrastructure - VIDM to VIDM",
-        $RNHZN7VIDM2SMTPName = "Infrastructure - VIDM to SMTP Server",
-        $RNHZN7VIDM2DCName = "Infrastructure - VIDM to Domain Controller",
-        $RNHZN7VIDM2DNSName = "Infrastructure - VIDM to DNS",
-        $RNHZN7VIDM2CTXBName = "Infrastructure - VIDM to Citrix Integration",
-        $RNHZN7VIDM2ThinAppFSName = "Infrastructure - VIDM to ThinApp FS",
-        $RNHZN7VIDM2UpgradeServerName = "Infrastructure - VIDM to Upgrade Server",
-        $RNHZN7VIDM22FAMGRName = "Infrastructure - VIDM to 2FA Manager",
-        $RNHZN7VIDM2AirWatchName = "Infrastructure - VIDM to AirWatch",
-        $RNHZN7VIDM2Name = "Infrastructure - VIDM to External DB",
-        $RNHZN7APPVMGR2vCenterName = "Infrastructure - App Volumes Manager to vCenter Server",
-        $RNHZN7APPVMGR2ESXiName = "Infrastructure - App Volumes Manager to ESXi",
-        $RNHZN7APPVMGR2Name = "Infrastructure - App Volumes Manager to External DB",
-        $RNV4H72ConnServerName = "Infrastructure - V4H to View Connection Server",
-        $RNV4H72AgentName = "Infrastrucutre - V4H to Horizon Agent",
-        $RNV4H72UAGMonitorName = "Infrastructure - V4H to UAG Monitoring",
-        $RNV4H72APPVMGRMonitorName = "Infrastructure - V4H to App Volumes Manager Monitoring",
-        $RNHZN7Admin2Name = "Management - Admin Console to Conn Server, vCenter, AppV Mgr, V4H",
-        $RNHZN7Admin2UAGName = "Management - Admin Console to UAG",
-        $RNHZN7Admin2VIDMName = "Management - Admin Console to VIDM",
-        $RNHZN7BlockVDI2VDIName = "Desktops - Block VDI to VDI",
-        
-        #Service Names
+            #DFW Rule Names
+            
+            $RNHZN7Client2ConnServerName = "Internal - Horizon Client to View Connection Server",
+            $RNHZN7Client2AgentName = "Internal - Horizon Client to Horizon Agent",
+            $RNHZN7Browser2AgentHTMLName = "Internal - Browser to Horizon Agent HTML",
+            $RNHZN7Browser2VIDMName = "Internal - Browser to vIDM",
+            $RNHZN7Client2UAGName = "External - Horizon Client to UAG",
+            $RNHZN7Browser2UAGHTMLName = "External - Browser to UAG HTML",
+            $RNHZN7Browser2UAGVIDMName = "External - Browser to UAG VIDM",
+            $RNHZN7Client2ConnServerTunnName = "Tunneled - Horizon Client to View Connection Server HTTPS",
+            $RNHZN7Browser2AgentTunnName = "Tunneled - Browser to View Connection Server",
+            $RNHZN7Browser2VIDMTunnName = "Tunneled - Browser to VIDM",
+            $RNHZN7Agent2ConnServerName = "Desktops - Horizon Agent to View Connection Server JMS",
+            $RNHZN7Agent2V4HName = "Desktops - Horizon Agent to V4H",
+            $RNAPPVAgent2APPVMGRName = "Desktops - App Volumes Agent to App Volumes Manager",
+            $RNUEMMGR2UEMFSSMBName = "Desktops - UEM Flex Engine to UEM File Servers",
+            $RNHZN7ConnServ2AgentTunnName = "Infrastructure - View Connection Server to Horizon Agent Tunneled",
+            $RNHZN7ConnServer2vCenterName = "Infrastructure - View Connection Server to vCenter Server",
+            $RNHZN7ConnServer2CompName = "Infrastructure - View Connection Server to View Composer",
+            $RNHZN7ConnServer2ConnServerName = "Infrastructure - View Connection Server to View Connection Server",
+            $RNHZN7ConnServer2EnrollmentName = "Infrastructure - View Connection Server to Enrollment Server",
+            $RNHZN7ConnServer2VIDMName = "Infrastructure - View Connection Server to VIDM",
+            $RNHZN7ConnServer2V4HName = "Infrastructure - View Connection Server to V4H",
+            $RNHZN7ConnServer22FAMGRName = "Infrastructure - View Connection Server to 2FA Manager",
+            $RNvCenter2ESXiName = "Infrastructure - vCenter Server to ESXi",
+            $RNHZN7Comp2vCenterName = "Infrastructure - View Composer to vCenter Server",
+            $RNHZN7Comp2ESXiName = "Infrastructure - View Composer to ESXi",
+            $RNHZN7UAG2ConnServerName = "Infrastructure - UAG to View Connection Server",
+            $RNHZN7UAG2AgentName = "Infrastructure - UAG to Horizon Agent",
+            $RNHZN7VIDM2ConnServerName = "Infrastructure - VIDM to View Connection Server",
+            $RNHZN7VIDM2VIDMName = "Infrastructure - VIDM to VIDM",
+            $RNHZN7VIDM2SMTPName = "Infrastructure - VIDM to SMTP Server",
+            $RNHZN7VIDM2DCName = "Infrastructure - VIDM to Domain Controller",
+            $RNHZN7VIDM2DNSName = "Infrastructure - VIDM to DNS",
+            $RNHZN7VIDM2CTXBName = "Infrastructure - VIDM to Citrix Integration",
+            $RNHZN7VIDM2ThinAppFSName = "Infrastructure - VIDM to ThinApp FS",
+            $RNHZN7VIDM2UpgradeServerName = "Infrastructure - VIDM to Upgrade Server",
+            $RNHZN7VIDM22FAMGRName = "Infrastructure - VIDM to 2FA Manager",
+            $RNHZN7VIDM2AirWatchName = "Infrastructure - VIDM to AirWatch",
+            $RNHZN7VIDM2Name = "Infrastructure - VIDM to External DB",
+            $RNHZN7APPVMGR2vCenterName = "Infrastructure - App Volumes Manager to vCenter Server",
+            $RNHZN7APPVMGR2ESXiName = "Infrastructure - App Volumes Manager to ESXi",
+            $RNHZN7APPVMGR2Name = "Infrastructure - App Volumes Manager to External DB",
+            $RNV4H72ConnServerName = "Infrastructure - V4H to View Connection Server",
+            $RNV4H72AgentName = "Infrastrucutre - V4H to Horizon Agent",
+            $RNV4H72UAGMonitorName = "Infrastructure - V4H to UAG Monitoring",
+            $RNV4H72APPVMGRMonitorName = "Infrastructure - V4H to App Volumes Manager Monitoring",
+            $RNHZN7Admin2Name = "Management - Admin Console to Conn Server, vCenter, AppV Mgr, V4H",
+            $RNHZN7Admin2UAGName = "Management - Admin Console to UAG",
+            $RNHZN7Admin2VIDMName = "Management - Admin Console to VIDM",
+            $RNHZN7BlockVDI2VDIName = "Desktops - Block VDI to VDI",
+            
+            #Service Names
 
-        $SVHZN7Client2ConnServerHTTPName = "Horizon 7 HTTP Horizon Client to View Connection Servers Standard",
-        $SVHZN7Client2ConnServerHTTPSName = "Horizon 7 HTTPS Horizon Client to View Connection Servers SSL",
-        $SVHZN7BEClient2AgentTCPName = "Horizon 7 Blast Extreme TCP Excellent Typical Horizon Client to Horizon Agent",
-        $SVHZN7BEClient2AgentUDPName = "Horizon 7 Blast Extreme UDP Typical Horizon Client to Horizon Agent",
-        $SVHZN7PCOIPClient2AgentTCPName = "Horizon 7 PCoIP TCP Horizon Client to Horizon Agent",
-        $SVHZN7PCOIPClient2AgentUDPName = "Horizon 7 PCoIP UDP Horizon Client to Horizon Agent",
-        $SVHZN7RDPClient2AgentName = "Horizon 7 RDP Horizon Client to Horizon Agent",
-        $SVHZN7CDRMMRClient2AgentName = "Horizon 7 CDR MMR Horizon Client to Horizon Agent",
-        $SVHZN7USBClient2AgentName = "Horizon 7 USB Horizon Client to Horizon Agent USB Redirection",
-        $SVHZN7Browser2AgentHTMLName = "Horizon 7 Browser to Horizon Agent HTML Access",
-        $SVHZN7Browser2VIDMName = "Horizon 7 Browser to VMware Identity Manager",
-        $SVHZN7Client2UAGName = "Horizon 7 Horizon Client to Unified Access Gateway",
-        $SVHZN7PCOIPClient2UAGTCPName = "Horizon 7 PCoIP TCP Horizon Client to Unified Access Gateway",
-        $SVHZN7PCOIPClient2UAGUDPName = "Horizon 7 PCoIP UDP Horizon Client to Unified Access Gateway",
-        $SVHZN7BEClient2UAGTCP443Name = "Horizon 7 Blast Extreme TCP 443 Excellent Typical Horizon Client to Unified Access Gateway",
-        $SVHZN7BEClient2UAGTCP8443Name = "Horizon 7 Blast Extreme TCP 8443 Excellent Typical Horizon Client to Unified Access Gateway",
-        $SVHZN7BEClient2UAGUDP443Name = "Horizon 7 Blast Extreme UDP 443 Poor Typical Horizon Client to Unified Access Gateway",
-        $SVHZN7BEClient2UAGUDP8443Name = "Horizon 7 Blast Extreme UDP 8443 Poor Typical Horizon Client to Unified Access Gateway",
-        $SVHZN7Browser2UAGHTMLName = "Horizon 7 Browser to Unified Access Gateway HTML Access",
-        $SVHZN7Browser2UAGVIDMName = "Horizon 7 Browser to Unified Access Gateway VIDM",
-        $SVHZN7Client2ConnServerTunnHTTPSName = "Horizon 7 HTTPS Horizon Client to Connection Servers Tunneled",
-        $SVHZN7Client2ConnServerTunnHTTPName = "Horizon 7 HTTP Horizon Client to View Connection Servers Tunneled",
-        $SVHZN7BEClient2ConnServerTCPName = "Horizon 7 Blast Extreme TCP Excellent Typical Horizon Client to View Connection Server",
-        $SVHZN7PCOIPClient2ConnServerTCPName = "Horizon 7 PCoIP TCP Horizon Client to View Connection Server",
-        $SVHZN7PCOIPClient2ConnServerUDPName = "Horizon 7 PCoIP UDP Horizon Client to View Connection Server",
-        $SVHZN7Browser2AgentTunnHTMLName = "Horizon 7 Browser to Horizon Agent HTML Access Tunneled",
-        $SVHZN7Browser2VIDMTunnName = "Horizon 7 Browser to VMware Identity Manager Tunneled",
-        $SVHZN7Agent2ConnServerEnhancedName = "Horizon 7 JMS Horizon Agent to Connection Server Enhanced",
-        $SVHZN7Agent2ConnServerLegacyName = "Horizon 7 JMS Horizon Agent to Connection Server Legacy",
-        $SVHZN7Agent2V4HRMIName = "Horizon 7 Horizon Agent to V4H RMI",
-        $SVHZN7Agent2V4HDMSName = "Horizon 7 Horizon Agent to V4H Desktop Message Server",
-        $SVAPPVAgent2APPVMGRSSLName = "App Volumes Agent to App Volumes Manager SSL",
-        $SVAPPVAgent2APPVMGRSTDName = "App Volumes Agent to App Volumes Manager Standard",
-        $SVUEMMGR2UEMFSSMBName = "User Environment Manager to UEM File Servers SMB",
-        $SVHZN7BEConnServ2AgentTunnName = "Horizon 7 Blast Extreme TCP View Connection Server to Horizon Agent Tunneled",
-        $SVHZN7PCOIPConnServ2AgentTunnTCPName = "Horizon 7 PCoIP TCP View Connection Server to Horizon Agent Tunneled",
-        $SVHZN7PCOIPConnServ2AgentTunnUDPName = "Horizon 7 PCoIP UDP View Connection Server to Horizon Agent Tunneled",
-        $SVHZN7RDPConnServer2AgentTunnName = "Horizon 7 RDP View Connection Server to Horizon Agent Tunneled",
-        $SVHZN7CDRMMRConnServer2AgentTunnName = "Horizon 7 CDR MMR View Connection Server to Horizon Agent Tunneled",
-        $SVHZN7USBClient2AgentUSBTunnName = "Horizon 7 USB Horizon Client to Horizon Agent USB Redirection Tunneled",
-        $SVHZN7ConnServer2vCenterSOAPName = "Horizon 7 HTTPS View Connection Server to vCenter Server SOAP",
-        $SVHZN7ConnServer2CompSOAPName = "Horizon 7 View Connection Server to View Composer SOAP",
-        $SVHZN7ConnServer2ConnServerJMSLegacyName = "Horizon 7 JMS View Connection Server to View Connection Server Legacy",
-        $SVHZN7ConnServer2ConnServerJMSSSLName = "Horizon 7 JMS View Connection Server to View Connection Server SSL",
-        $SVHZN7CPALDAPREPLName = "Horizon 7 CPA Global LDAP Replication",
-        $SVHZN7CPALDAPREPLSSLName = "Horizon 7 CPA Global LDAP Replication SSL",
-        $SVHZN7CPAInterPodVIPAName = "Horizon 7 CPA Inter-Pod VIPA",
-        $SVHZN7ConnServerInstallReplicaName = "Horizon 7 View Connection Server Install Replica",
-        $SVHZN7ConnServer2EnrollmentName = "Horizon 7 View Connection Server to Enrollment Server View Framework",
-        $SVHZN7ConnServer2VIDMName = "Horizon 7 View Connection Server to VMware Identity Manager Message Bus",
-        $SVHZN7ConnServer2V4HRMIName = "Horizon 7 View Connection Server to V4H RMI",
-        $SVHZN7ConnServer2V4HBMSName = "Horizon 7 View Connection Server to V4H Broker Message Server",
-        $SVHZN7ConnServer2V4HCMSName = "Horizon 7 View Connection Server to V4H Cert Management Server",
-        $SVHZN7ConnServer22FAMGRName = "Horizon 7 Default View Connection Server to 2FA Manager",
-        $SVvCenter2ESXiSOAPName = "vCenter Server to ESXi SOAP",
-        $SVHZN7Comp2vCenterSOAPName = "Horion 7 View Composer to vCenter Server SOAP",
-        $SVHZN7Comp2ESXiSOAPName = "Horizon 7 View Composer to ESXi SOAP",
-        $SVHZN7UAG2ConnServerLoginName = "Horizon 7 Unified Access Gateway to View Connection Server Login",
-        $SVHZN7BEUAG2AgentTCPName = "Horizon 7 Unified Blast Extreme TCP Unified Access Gateway to Horizon Agent",
-        $SVHZN7BEUAG2AgentUDPName = "Horizon 7 Unified Blast Extreme UDP Unified Access Gateway to Horizon Agent",
-        $SVHZN7PCOIP2AgentTCPName = "Horizon 7 PCoIP TCP Unified Access Gateway to Horizon Agent",
-        $SVHZN7PCOIP2AgentUDPName = "Horizon 7 PCoIP UDP Unified Access Gateway to Horizon Agent",
-        $SVHZN7RDPUAG2AgentName = "Horizon 7 RDP Unified Access Gateway to Horizon Agent",
-        $SVHZN7CDRMMRUAG2AgentName = "Horizon 7 CDR MMR Unified Access Gateway to Horizon Agent",
-        $SVHZN7USBUAG2AgentName = "Horizon 7 USB Unified Acess Gateway to Horizon Agent USB Redirection",
-        $SVHZN7UAG2AgentName = "Horizon 7 Unified Access Gateway to Horizon Agent",
-        $SVHZN7UAG22FAMGRName = "Horizon 7 Default Unified Access Gateway to 2FA",
-        $SVHZN7VIDM2ConnServerLDAPName = "Horizon 7 LDAP VMware Identity Manager to View Connection Server",
-        $SVHZN7VIDM2ConnServerHTTPSName = "Horizon 7 HTTPS VMware Identity Manager to View Connection Server",
-        $SVHZN7VIDM2VIDMHTTPSName = "Horizon 7 HTTPS VMware Identity Manager to VMware Identity Manager",
-        $SVHZN7VIDM2VIDMAuditName = "Horizon 7 VMware Identity Manager to VMware Identity Manager Audit",
-        $SVHZN7VIDM2SMTPName = "Horizon 7 VMware Identity Manager to SMTP Server",
-        $SVHZN7VIDM2DCLDAPName = "Horizon 7 LDAP VMware Identity Manager to Domain Controller",
-        $SVHZN7VIDM2DCKerberosTCPName = "Horizon 7 Kerberos TCP VMware Identity Manager to Domain Controller",
-        $SVHZN7VIDM2DCKerberosUDPName = "Horizon 7 Kerberos UDP VMware Identity Manager to Domain Controller",
-        $SVHZN7VIDM2DCKerberosPWDTCPName = "Horizon 7 TCP Kerberos PWD VMware Identity Manager to Domain Controller",
-        $SVHZN7VIDM2DCKerberosPWDUDPName = "Horizon 7 UDP Kerberos PWD VMware Identity Manager to Domain Controller",
-        $SVHZN7VIDM2DCRPCName = "Horizon 7 RPC VMware Identity Manager to Domain Controller",
-        $SVHZN7VIDM2DNSTCPName = "Horizon 7 DNS TCP VMware Identity Manager to DNS Server",
-        $SVHZN7VIDM2DNSUDPName = "Horizon 7 DNS UDP VMware Identity Manager to DNS Server",
-        $SVHZN7VIDM2CTXBSTDName = "VMware Identity Manager to Citrix integration Broker Standard",
-        $SVHZN7VIDM2CTXSSLName = "VMware Identity Manager to Citrix integration Broker SSL",
-        $SVHZN7VIDM2ThinAppFSSMBName = "VMware Identity Manger to ThinApp File Servers SMB",
-        $SVHZN7VIDM2UpgradeServerName = "VMware Identity Manager to Upgrade Server",
-        $SVHZN7VIDM22FAMGRName = "VMware Identity Manager Default to 2FA Manager",
-        $SVHZN7VIDM2AirWatchRESTAPIName = "VMware Identity Manager to VMware AirWatch REST API",
-        $SVHZN7VIDM2MSSQLName = "VMware Identity Manager to External MSSQL",
-        $SVHZN7VIDM2PostgreSQLName = "VMware Identity Manager to Extenal PostgreSQL",
-        $SVHZN7VIDM2OracleName = "VMware Identity Manager to External Oracle",
-        $SVHZN7APPVMGR2vCenterSOAPName = "App Volumes Manager to vCenter Server SOAP",
-        $SVHZN7APPVMGR2ESXiName = "App Volumes Manager to ESXi Hostd",
-        $SVHZN7APPVMGR2MSSQLName = "App Volumes Manager Default to MSSQL",
-        $SVV4H2ConnServerRMIName = "V4H to View Connection Server RMI",
-        $SVV4H2ConnServerBMSName = "V4H to View Connection Server Broker Message Server",
-        $SVV4H2ConnServerCMSName = "V4H to View Connection Server Cert Management Server",
-        $SVV4H2AgentRMIName = "V4H to Horizon Agent RMI",
-        $SVV4H2AgentDMSName = "V4H to Horizon Agent Desktop Message Server",
-        $SVV4H2UAGMonitorName = "V4H to Unified Access Gateway Monitoring",
-        $SVV4H2APPVMGRMonitorName = "V4H to App Volumes Manager Monitoring",
-        $SVHZN7Admin2ConnServerName = "Horizon 7 Admin Console to View Connection Server",
-        $SVHZN7Admin2vCenterName = "Horizon 7 Admin Console to vCenter Server",
-        $SVHZN7Admin2APPVMGRName = "Horizon 7 Admin Console to App Volumes Manager",
-        $SVHZN7Admin2VIDMName = "Horizon 7 Admin Console to VMware Identity Manager",
-        $SVHZN7Admin2V4HName = "Horizon 7 Admin Console to V4H",
-        $SVHZN7Admin2UAGName = "Horizon 7 Admin Console to Unified Access Gateway",
+            $SVHZN7Client2ConnServerHTTPName = "Horizon 7 HTTP Horizon Client to View Connection Servers Standard",
+            $SVHZN7Client2ConnServerHTTPSName = "Horizon 7 HTTPS Horizon Client to View Connection Servers SSL",
+            $SVHZN7BEClient2AgentTCPName = "Horizon 7 Blast Extreme TCP Excellent Typical Horizon Client to Horizon Agent",
+            $SVHZN7BEClient2AgentUDPName = "Horizon 7 Blast Extreme UDP Typical Horizon Client to Horizon Agent",
+            $SVHZN7PCOIPClient2AgentTCPName = "Horizon 7 PCoIP TCP Horizon Client to Horizon Agent",
+            $SVHZN7PCOIPClient2AgentUDPName = "Horizon 7 PCoIP UDP Horizon Client to Horizon Agent",
+            $SVHZN7RDPClient2AgentName = "Horizon 7 RDP Horizon Client to Horizon Agent",
+            $SVHZN7CDRMMRClient2AgentName = "Horizon 7 CDR MMR Horizon Client to Horizon Agent",
+            $SVHZN7USBClient2AgentName = "Horizon 7 USB Horizon Client to Horizon Agent USB Redirection",
+            $SVHZN7Browser2AgentHTMLName = "Horizon 7 Browser to Horizon Agent HTML Access",
+            $SVHZN7Browser2VIDMName = "Horizon 7 Browser to VMware Identity Manager",
+            $SVHZN7Client2UAGName = "Horizon 7 Horizon Client to Unified Access Gateway",
+            $SVHZN7PCOIPClient2UAGTCPName = "Horizon 7 PCoIP TCP Horizon Client to Unified Access Gateway",
+            $SVHZN7PCOIPClient2UAGUDPName = "Horizon 7 PCoIP UDP Horizon Client to Unified Access Gateway",
+            $SVHZN7BEClient2UAGTCP443Name = "Horizon 7 Blast Extreme TCP 443 Excellent Typical Horizon Client to Unified Access Gateway",
+            $SVHZN7BEClient2UAGTCP8443Name = "Horizon 7 Blast Extreme TCP 8443 Excellent Typical Horizon Client to Unified Access Gateway",
+            $SVHZN7BEClient2UAGUDP443Name = "Horizon 7 Blast Extreme UDP 443 Poor Typical Horizon Client to Unified Access Gateway",
+            $SVHZN7BEClient2UAGUDP8443Name = "Horizon 7 Blast Extreme UDP 8443 Poor Typical Horizon Client to Unified Access Gateway",
+            $SVHZN7Browser2UAGHTMLName = "Horizon 7 Browser to Unified Access Gateway HTML Access",
+            $SVHZN7Browser2UAGVIDMName = "Horizon 7 Browser to Unified Access Gateway VIDM",
+            $SVHZN7Client2ConnServerTunnHTTPSName = "Horizon 7 HTTPS Horizon Client to Connection Servers Tunneled",
+            $SVHZN7Client2ConnServerTunnHTTPName = "Horizon 7 HTTP Horizon Client to View Connection Servers Tunneled",
+            $SVHZN7BEClient2ConnServerTCPName = "Horizon 7 Blast Extreme TCP Excellent Typical Horizon Client to View Connection Server",
+            $SVHZN7PCOIPClient2ConnServerTCPName = "Horizon 7 PCoIP TCP Horizon Client to View Connection Server",
+            $SVHZN7PCOIPClient2ConnServerUDPName = "Horizon 7 PCoIP UDP Horizon Client to View Connection Server",
+            $SVHZN7Browser2AgentTunnHTMLName = "Horizon 7 Browser to Horizon Agent HTML Access Tunneled",
+            $SVHZN7Browser2VIDMTunnName = "Horizon 7 Browser to VMware Identity Manager Tunneled",
+            $SVHZN7Agent2ConnServerEnhancedName = "Horizon 7 JMS Horizon Agent to Connection Server Enhanced",
+            $SVHZN7Agent2ConnServerLegacyName = "Horizon 7 JMS Horizon Agent to Connection Server Legacy",
+            $SVHZN7Agent2V4HRMIName = "Horizon 7 Horizon Agent to V4H RMI",
+            $SVHZN7Agent2V4HDMSName = "Horizon 7 Horizon Agent to V4H Desktop Message Server",
+            $SVAPPVAgent2APPVMGRSSLName = "App Volumes Agent to App Volumes Manager SSL",
+            $SVAPPVAgent2APPVMGRSTDName = "App Volumes Agent to App Volumes Manager Standard",
+            $SVUEMMGR2UEMFSSMBName = "User Environment Manager to UEM File Servers SMB",
+            $SVHZN7BEConnServ2AgentTunnName = "Horizon 7 Blast Extreme TCP View Connection Server to Horizon Agent Tunneled",
+            $SVHZN7PCOIPConnServ2AgentTunnTCPName = "Horizon 7 PCoIP TCP View Connection Server to Horizon Agent Tunneled",
+            $SVHZN7PCOIPConnServ2AgentTunnUDPName = "Horizon 7 PCoIP UDP View Connection Server to Horizon Agent Tunneled",
+            $SVHZN7RDPConnServer2AgentTunnName = "Horizon 7 RDP View Connection Server to Horizon Agent Tunneled",
+            $SVHZN7CDRMMRConnServer2AgentTunnName = "Horizon 7 CDR MMR View Connection Server to Horizon Agent Tunneled",
+            $SVHZN7USBClient2AgentUSBTunnName = "Horizon 7 USB Horizon Client to Horizon Agent USB Redirection Tunneled",
+            $SVHZN7ConnServer2vCenterSOAPName = "Horizon 7 HTTPS View Connection Server to vCenter Server SOAP",
+            $SVHZN7ConnServer2CompSOAPName = "Horizon 7 View Connection Server to View Composer SOAP",
+            $SVHZN7ConnServer2ConnServerJMSLegacyName = "Horizon 7 JMS View Connection Server to View Connection Server Legacy",
+            $SVHZN7ConnServer2ConnServerJMSSSLName = "Horizon 7 JMS View Connection Server to View Connection Server SSL",
+            $SVHZN7CPALDAPREPLName = "Horizon 7 CPA Global LDAP Replication",
+            $SVHZN7CPALDAPREPLSSLName = "Horizon 7 CPA Global LDAP Replication SSL",
+            $SVHZN7CPAInterPodVIPAName = "Horizon 7 CPA Inter-Pod VIPA",
+            $SVHZN7ConnServerInstallReplicaName = "Horizon 7 View Connection Server Install Replica",
+            $SVHZN7ConnServer2EnrollmentName = "Horizon 7 View Connection Server to Enrollment Server View Framework",
+            $SVHZN7ConnServer2VIDMName = "Horizon 7 View Connection Server to VMware Identity Manager Message Bus",
+            $SVHZN7ConnServer2V4HRMIName = "Horizon 7 View Connection Server to V4H RMI",
+            $SVHZN7ConnServer2V4HBMSName = "Horizon 7 View Connection Server to V4H Broker Message Server",
+            $SVHZN7ConnServer2V4HCMSName = "Horizon 7 View Connection Server to V4H Cert Management Server",
+            $SVHZN7ConnServer22FAMGRName = "Horizon 7 Default View Connection Server to 2FA Manager",
+            $SVvCenter2ESXiSOAPName = "vCenter Server to ESXi SOAP",
+            $SVHZN7Comp2vCenterSOAPName = "Horion 7 View Composer to vCenter Server SOAP",
+            $SVHZN7Comp2ESXiSOAPName = "Horizon 7 View Composer to ESXi SOAP",
+            $SVHZN7UAG2ConnServerLoginName = "Horizon 7 Unified Access Gateway to View Connection Server Login",
+            $SVHZN7BEUAG2AgentTCPName = "Horizon 7 Unified Blast Extreme TCP Unified Access Gateway to Horizon Agent",
+            $SVHZN7BEUAG2AgentUDPName = "Horizon 7 Unified Blast Extreme UDP Unified Access Gateway to Horizon Agent",
+            $SVHZN7PCOIP2AgentTCPName = "Horizon 7 PCoIP TCP Unified Access Gateway to Horizon Agent",
+            $SVHZN7PCOIP2AgentUDPName = "Horizon 7 PCoIP UDP Unified Access Gateway to Horizon Agent",
+            $SVHZN7RDPUAG2AgentName = "Horizon 7 RDP Unified Access Gateway to Horizon Agent",
+            $SVHZN7CDRMMRUAG2AgentName = "Horizon 7 CDR MMR Unified Access Gateway to Horizon Agent",
+            $SVHZN7USBUAG2AgentName = "Horizon 7 USB Unified Acess Gateway to Horizon Agent USB Redirection",
+            $SVHZN7UAG2AgentName = "Horizon 7 Unified Access Gateway to Horizon Agent",
+            $SVHZN7UAG22FAMGRName = "Horizon 7 Default Unified Access Gateway to 2FA",
+            $SVHZN7VIDM2ConnServerLDAPName = "Horizon 7 LDAP VMware Identity Manager to View Connection Server",
+            $SVHZN7VIDM2ConnServerHTTPSName = "Horizon 7 HTTPS VMware Identity Manager to View Connection Server",
+            $SVHZN7VIDM2VIDMHTTPSName = "Horizon 7 HTTPS VMware Identity Manager to VMware Identity Manager",
+            $SVHZN7VIDM2VIDMAuditName = "Horizon 7 VMware Identity Manager to VMware Identity Manager Audit",
+            $SVHZN7VIDM2SMTPName = "Horizon 7 VMware Identity Manager to SMTP Server",
+            $SVHZN7VIDM2DCLDAPName = "Horizon 7 LDAP VMware Identity Manager to Domain Controller",
+            $SVHZN7VIDM2DCKerberosTCPName = "Horizon 7 Kerberos TCP VMware Identity Manager to Domain Controller",
+            $SVHZN7VIDM2DCKerberosUDPName = "Horizon 7 Kerberos UDP VMware Identity Manager to Domain Controller",
+            $SVHZN7VIDM2DCKerberosPWDTCPName = "Horizon 7 TCP Kerberos PWD VMware Identity Manager to Domain Controller",
+            $SVHZN7VIDM2DCKerberosPWDUDPName = "Horizon 7 UDP Kerberos PWD VMware Identity Manager to Domain Controller",
+            $SVHZN7VIDM2DCRPCName = "Horizon 7 RPC VMware Identity Manager to Domain Controller",
+            $SVHZN7VIDM2DNSTCPName = "Horizon 7 DNS TCP VMware Identity Manager to DNS Server",
+            $SVHZN7VIDM2DNSUDPName = "Horizon 7 DNS UDP VMware Identity Manager to DNS Server",
+            $SVHZN7VIDM2CTXBSTDName = "VMware Identity Manager to Citrix integration Broker Standard",
+            $SVHZN7VIDM2CTXSSLName = "VMware Identity Manager to Citrix integration Broker SSL",
+            $SVHZN7VIDM2ThinAppFSSMBName = "VMware Identity Manger to ThinApp File Servers SMB",
+            $SVHZN7VIDM2UpgradeServerName = "VMware Identity Manager to Upgrade Server",
+            $SVHZN7VIDM22FAMGRName = "VMware Identity Manager Default to 2FA Manager",
+            $SVHZN7VIDM2AirWatchRESTAPIName = "VMware Identity Manager to VMware AirWatch REST API",
+            $SVHZN7VIDM2MSSQLName = "VMware Identity Manager to External MSSQL",
+            $SVHZN7VIDM2PostgreSQLName = "VMware Identity Manager to Extenal PostgreSQL",
+            $SVHZN7VIDM2OracleName = "VMware Identity Manager to External Oracle",
+            $SVHZN7APPVMGR2vCenterSOAPName = "App Volumes Manager to vCenter Server SOAP",
+            $SVHZN7APPVMGR2ESXiName = "App Volumes Manager to ESXi Hostd",
+            $SVHZN7APPVMGR2MSSQLName = "App Volumes Manager Default to MSSQL",
+            $SVV4H2ConnServerRMIName = "V4H to View Connection Server RMI",
+            $SVV4H2ConnServerBMSName = "V4H to View Connection Server Broker Message Server",
+            $SVV4H2ConnServerCMSName = "V4H to View Connection Server Cert Management Server",
+            $SVV4H2AgentRMIName = "V4H to Horizon Agent RMI",
+            $SVV4H2AgentDMSName = "V4H to Horizon Agent Desktop Message Server",
+            $SVV4H2UAGMonitorName = "V4H to Unified Access Gateway Monitoring",
+            $SVV4H2APPVMGRMonitorName = "V4H to App Volumes Manager Monitoring",
+            $SVHZN7Admin2ConnServerName = "Horizon 7 Admin Console to View Connection Server",
+            $SVHZN7Admin2vCenterName = "Horizon 7 Admin Console to vCenter Server",
+            $SVHZN7Admin2APPVMGRName = "Horizon 7 Admin Console to App Volumes Manager",
+            $SVHZN7Admin2VIDMName = "Horizon 7 Admin Console to VMware Identity Manager",
+            $SVHZN7Admin2V4HName = "Horizon 7 Admin Console to V4H",
+            $SVHZN7Admin2UAGName = "Horizon 7 Admin Console to Unified Access Gateway",
 
-        #IP Sets for VIPs and other
-        $IPHorizon7UpdateServer = "IP-Horizon7-UpdateServer",
-        $IPHorizon7ConnServerVIP = "IP-Horizon7-ConnServer-VIP",
-        $IPHorizon7UAGVIP = "IP-Horizon7-UAG-VIP",
-        $IPHorizon7AppVolVIP = "IP-Horizon7-AppVol-VIP",
-        $IPHorizon7vIDMVIP = "IP-Horizon7-vIDM-VIP",
-        $IPHorizon7AdminConsole = "IP-Horizon7-AdminConsole",
-        $IPHorizon7VDIESXi = "IP-Horizon7-VDI-ESXi",
+            #IP Sets for VIPs and other
+            $IPHorizon7UpdateServer = "IP-Horizon7-UpdateServer",
+            $IPHorizon7ConnServerVIP = "IP-Horizon7-ConnServer-VIP",
+            $IPHorizon7UAGVIP = "IP-Horizon7-UAG-VIP",
+            $IPHorizon7AppVolVIP = "IP-Horizon7-AppVol-VIP",
+            $IPHorizon7vIDMVIP = "IP-Horizon7-vIDM-VIP",
+            $IPHorizon7AdCon = "IP-Horizon7-AdCon",
+            $IPHorizon7VDIESXi = "IP-Horizon7-VDI-ESXi",
 
-        #Service Port and Protocol
-        
-        #Protocol
-        $TCP = "tcp",
-        $UDP = "udp",
-        
-        #Port
-        $80 = "80",
-        $443 = "443",
-        $22443 = "22443",
-        $4172 = "4172",
-        $3389 = "3389",
-        $9427 = "9427",
-        $32111 = "32111",
-        $8443 = "8443",
-        $4002 = "4002",
-        $4001 = "4001",
-        $3091 = "3091",
-        $3099 = "3099",
-        $445 = "445",
-        $18443 = "18443",
-        $4100 = "4100",
-        $4101 = "4101",
-        $22389 = "22389",
-        $22636 = "22636",
-        $8472 = "8472",
-        $3901 = "3901",
-        $3101 = "3101",
-        $3100 = "3100",
-        $5500 = "5500",
-        $902 = "902",
-        $389 = "389",
-        $93009400 = "9300-9400",
-        $25 = "25",
-        $88 = "88",
-        $464 = "464",
-        $135 = "135",
-        $53 = "53",
-        $1433 = "1433",
-        $5432 = "5432",
-        $1521 = "1521",
-        $3909 = "3909",
-        $9443 = "9443"
+            #Service Port and Protocol
+            
+            #Protocol
+            $TCP = "tcp",
+            $UDP = "udp",
+            
+            #Port
+            $80 = "80",
+            $443 = "443",
+            $22443 = "22443",
+            $4172 = "4172",
+            $3389 = "3389",
+            $9427 = "9427",
+            $32111 = "32111",
+            $8443 = "8443",
+            $4002 = "4002",
+            $4001 = "4001",
+            $3091 = "3091",
+            $3099 = "3099",
+            $445 = "445",
+            $18443 = "18443",
+            $4100 = "4100",
+            $4101 = "4101",
+            $22389 = "22389",
+            $22636 = "22636",
+            $8472 = "8472",
+            $3901 = "3901",
+            $3101 = "3101",
+            $3100 = "3100",
+            $5500 = "5500",
+            $902 = "902",
+            $389 = "389",
+            $93009400 = "9300-9400",
+            $25 = "25",
+            $88 = "88",
+            $464 = "464",
+            $135 = "135",
+            $53 = "53",
+            $1433 = "1433",
+            $5432 = "5432",
+            $1521 = "1521",
+            $3909 = "3909",
+            $9443 = "9443"
+
         )
 
         ##Build New Horizon 7 DFW Sections
@@ -294,45 +295,50 @@
         "Horizon 7 Infrastructure - App Volumes Manager",
         "Horizon 7 Infrastructure - vRealize Operations for Horizon",
         "Horizon 7 Infrastructure - Management"
+        
         foreach ($item in $SectionNames) {
-        $Section = Get-NsxFirewallSection -Name "$item"
-        if (!$Section)
-        {
-        New-NsxFirewallSection -name $item | out-null
-        }}
+            $Section = Get-NsxFirewallSection -Name "$item"
+                if (!$Section)
+                {
+                     New-NsxFirewallSection -name $item | out-null
+                     Write-Host -ForegroundColor Green "Creating Firewall Section $item"
+                }
+        }
     
         ##Build New Security Tags
         ##Checks if exists first
         $SecurityTagNames = 
-        "ST-Horizon7-Client",
-        "ST-Horizon7-ConnServer",
-        "ST-Horizon7-vIDM",
-        "ST-Horizon7-UAG",
-        "ST-Horizon7-VDI",
-        "ST-Horizon7-RDSHost",
-        "ST-Horizon7-EnrollServer",
-        "ST-Horizon7-AppVolMgr",
-        "ST-Horizon7-vCenterMgmt",
-        "ST-Horizon7-vCenterVDI_RDSH",
-        "ST-Horizon7-UEM_FS",
-        "ST-Horizon7-UEM_Mgr",
-        "ST-Horizon7-Composer",
-        "ST-Horizon7-DomainCtrl",
-        "ST-Horizon7-DNS",
-        "ST-Horizon7-SMTP",
-        "ST-Horizon7-Citrix",
-        "ST-Horizon7-ThinApp_FS",
-        "ST-Horizon7-2FA",
-        "ST-Horizon7-AirWatch",
-        "ST-Horizon7-V4H"
-        "ST-Horizon7-AdminConsole",
-        "ST-Horizon7-Database"
+            "ST-Horizon7-Client",
+            "ST-Horizon7-ConnServer",
+            "ST-Horizon7-vIDM",
+            "ST-Horizon7-UAG",
+            "ST-Horizon7-VDI",
+            "ST-Horizon7-RDSHost",
+            "ST-Horizon7-EnrollServer",
+            "ST-Horizon7-AppVolMgr",
+            "ST-Horizon7-vCenterMgmt",
+            "ST-Horizon7-vCenterVDI_RDSH",
+            "ST-Horizon7-UEM_FS",
+            "ST-Horizon7-UEM_Mgr",
+            "ST-Horizon7-Composer",
+            "ST-Horizon7-DomainCtrl",
+            "ST-Horizon7-DNS",
+            "ST-Horizon7-SMTP",
+            "ST-Horizon7-Citrix",
+            "ST-Horizon7-ThinApp_FS",
+            "ST-Horizon7-2FA",
+            "ST-Horizon7-AirWatch",
+            "ST-Horizon7-V4H",
+            "ST-Horizon7-AdCon",
+            "ST-Horizon7-Database"
         foreach ($item in $SecurityTagNames) {
-        $SecurityTag = Get-NsxSecurityTag -Name "$item"
-        if (!$SecurityTag)
-        {
-        New-NsxSecurityTag -name $item | out-null
-        }}
+            $SecurityTag = Get-NsxSecurityTag -Name "$item"
+            if (!$SecurityTag)
+                {
+                    New-NsxSecurityTag -name $item | out-null
+                    Write-Host -ForegroundColor Green "Creating Security Tag $item"
+                }
+            }
 
         #Build New Security Groups
         #Section for Future nested loop to attach ST to SG
@@ -364,6 +370,10 @@
         #{
         #New-NsxSecurityGroup -name $item -IncludeMember   out-null
         #}}
+
+        Write-host -ForegroundColor Green "Creating Security Groups"
+
+        $STHZN7AdCon = Get-NsxSecurityTag -name $STHZN7AdConName
    
         $SGHZN7Client = New-NsxSecurityGroup -name $SGHZN7ClientName -IncludeMember (Get-NsxSecurityTag -Name $STHZN7ClientName)
         $SGHZN7ConnServer = New-NsxSecurityGroup -name $SGHZN7ConnServerName -IncludeMember (Get-NsxSecurityTag -Name $STHZN7ConnServerName)
@@ -386,11 +396,12 @@
         $SGHZN72FA = New-NsxSecurityGroup -name $SGHZN72FAName -IncludeMember (Get-NsxSecurityTag -Name $STHZN72FAName)
         $SGHZN7AirWatch = New-NsxSecurityGroup -name $SGHZN7AirWatchName -IncludeMember (Get-NsxSecurityTag -Name $STHZN7AirWatchName)
         $SGHZN7V4H = New-NsxSecurityGroup -name $SGHZN7V4HName -IncludeMember (Get-NsxSecurityTag -name $STHZN7V4HName)
-        $SGHZN7AdminConsole = New-NsxSecurityGroup -name $SGHZN7AdminConsoleName -IncludeMember (Get-NsxSecurityTag -name $STHZN7AdminConsoleName)
+        $SGHZN7AdCon = New-NsxSecurityGroup -name $SGHZN7AdConName -IncludeMember $STHZN7AdCon
         $SGHZN7DatabaseName = New-NsxSecurityGroup -name $SGHZN7DatabaseName -IncludeMember (Get-NsxSecurityTag -name $STHZN7DatabaseName)
     
         #Build New Services
     
+        Write-host -ForegroundColor Green "Creating Services"
         $SVHZN7Client2ConnServerHTTP = New-NsxService -name $SVHZN7Client2ConnServerHTTPName -protocol $TCP -port $80 -description "Horizon 7 HTTP Horizon Client to View Connection Servers Standard" -EnableInheritance
         $SVHZN7Client2ConnServerHTTPS = New-NsxService -name $SVHZN7Client2ConnServerHTTPSName -protocol $TCP -port $443 -description "Horizon 7 HTTPS Horizon Client to View Connection Servers SSL" -EnableInheritance
         $SVHZN7BEClient2AgentTCP = New-NsxService -name $SVHZN7BEClient2AgentTCPName -protocol $TCP -port $22443 -description "Horizon 7 Blast Extreme TCP Excellent Typical Horizon Client to Horizon Agent" -EnableInheritance
@@ -431,7 +442,7 @@
         $SVHZN7RDPConnServer2AgentTunn = New-NsxService -name $SVHZN7RDPConnServer2AgentTunnName -protocol $TCP -port $3389 -description "Horizon 7 RDP View Connection Server to Horizon Agent Tunneled" -EnableInheritance
         $SVHZN7CDRMMRConnServer2AgentTunn = New-NsxService -name $SVHZN7CDRMMRConnServer2AgentTunnName -protocol $TCP -port $9427 -description "Horizon 7 CDR MMR View Connection Server to Horizon Agent Tunneled" -EnableInheritance
         $SVHZN7USBClient2AgentUSBTunn = New-NsxService -name $SVHZN7USBClient2AgentUSBTunnName -protocol $TCP -port $32111 -description "Horizon 7 USB Horizon Client to Horizon Agent USB Redirection Tunneled" -EnableInheritance
-        $SVHZN7ConnServer2vCenterSOAP = New-NsxService -name $SVHZN7ConnServer2vCenterSOAPName -protocol $TCP -port $433 -description "Horizon 7 HTTPS View Connection Server to vCenter Server SOAP" -EnableInheritance
+        $SVHZN7ConnServer2vCenterSOAP = New-NsxService -name $SVHZN7ConnServer2vCenterSOAPName -protocol $TCP -port $443 -description "Horizon 7 HTTPS View Connection Server to vCenter Server SOAP" -EnableInheritance
         $SVHZN7ConnServer2CompSOAP = New-NsxService -name $SVHZN7ConnServer2CompSOAPName -protocol $TCP -port $18443 -description "Horizon 7 View Connection Server to View Composer SOAP" -EnableInheritance
         $SVHZN7ConnServer2ConnServerJMSLegacy = New-NsxService -name $SVHZN7ConnServer2ConnServerJMSLegacyName -protocol $TCP -port $4100 -description "Horizon 7 JMS View Connection Server to View Connection Server Legacy" -EnableInheritance
         $SVHZN7ConnServer2ConnServerJMSSSL = New-NsxService -name $SVHZN7ConnServer2ConnServerJMSSSLName -protocol $TCP -port $4101 -description "Horizon 7 JMS View Connection Server to View Connection Server SSL" -EnableInheritance
@@ -446,8 +457,8 @@
         $SVHZN7ConnServer2V4HCMS = New-NsxService -name $SVHZN7ConnServer2V4HCMSName -protocol $TCP -port $3100 -description "Horizon 7 View Connection Server to V4H Cert Management Server" -EnableInheritance
         $SVHZN7ConnServer22FAMGR = New-NsxService -name $SVHZN7ConnServer22FAMGRName -protocol $UDP -port $5500 -description "Horizon 7 Default View Connection Server to 2FA Manager  " -EnableInheritance
         $SVvCenter2ESXiSOAP = New-NsxService -name $SVvCenter2ESXiSOAPName -protocol $TCP -port $902 -description "vCenter Server to ESXi SOAP" -EnableInheritance
-        $SVHZN7Comp2vCenterSOAP = New-NsxService -name $SVHZNComp2vCenterSOAPName -protocol $TCP -port $443 -description "Horion 7 View Composer to vCenter Server SOAP" -EnableInheritance
-        $SVHZN7Comp2ESXiSOAP = New-NsxService -name $SVHZNComp2ESXiSOAPName -protocol $TCP -port $902 -description "Horizon 7 View Composer to ESXi SOAP" -EnableInheritance
+        $SVHZN7Comp2vCenterSOAP = New-NsxService -name $SVHZN7Comp2vCenterSOAPName -protocol $TCP -port $443 -description "Horion 7 View Composer to vCenter Server SOAP" -EnableInheritance
+        $SVHZN7Comp2ESXiSOAP = New-NsxService -name $SVHZN7Comp2ESXiSOAPName -protocol $TCP -port $902 -description "Horizon 7 View Composer to ESXi SOAP" -EnableInheritance
         $SVHZN7UAG2ConnServerLogin = New-NsxService -name $SVHZN7UAG2ConnServerLoginName -protocol $TCP -port $443 -description "Horizon 7 Unified Access Gateway to View Connection Server Login" -EnableInheritance
         $SVHZN7BEUAG2AgentTCP = New-NsxService -name $SVHZN7BEUAG2AgentTCPName -protocol $TCP -port $22443 -description "Horizon 7 Unified Blast Extreme TCP Unified Access Gateway to Horizon Agent " -EnableInheritance
         $SVHZN7BEUAG2AgentUDP = New-NsxService -name $SVHZN7BEUAG2AgentUDPName -protocol $UDP -port $22443 -description "Horizon 7 Unified Blast Extreme UDP Unified Access Gateway to Horizon Agent " -EnableInheritance
@@ -480,7 +491,7 @@
         $SVHZN7VIDM2MSSQL = New-NsxService -name $SVHZN7VIDM2MSSQLName -protocol $TCP -port $1433 -description "VMware Identity Manager to External MSSQL" -EnableInheritance
         $SVHZN7VIDM2PostgreSQL = New-NsxService -name $SVHZN7VIDM2PostgreSQLName -protocol $TCP -port $5432 -description "VMware Identity Manager to Extenal PostgreSQL" -EnableInheritance
         $SVHZNVIDM2Oracle = New-NsxService -name $SVHZN7VIDM2OracleName -protocol $TCP -port $1521 -description "VMware Identity Manager to External Oracle" -EnableInheritance
-        $SVHZN7APPVMGR2vCenterSOAP = New-NsxService -name $SVHZNAPPVMGR2vCenterSOAPName -protocol $TCP -port $443 -description "App Volumes Manager to vCenter Server SOAP" -EnableInheritance
+        $SVHZN7APPVMGR2vCenterSOAP = New-NsxService -name $SVHZN7APPVMGR2vCenterSOAPName -protocol $TCP -port $443 -description "App Volumes Manager to vCenter Server SOAP" -EnableInheritance
         $SVHZN7APPVMGR2ESXi = New-NsxService -name $SVHZN7APPVMGR2ESXiName -protocol $TCP -port $443 -description "App Volumes Manager to ESXi Hostd" -EnableInheritance
         $SVHZN7APPVMGR2MSSQL = New-NsxService -name $SVHZN7APPVMGR2MSSQLName -protocol $TCP -port $1433 -description "App Volumes Manager Default to MSSQL" -EnableInheritance
         $SVV4H2ConnServerRMI = New-NsxService -name $SVV4H2ConnServerRMIName -protocol $TCP -port $3091 -description "V4H to View Connection Server RMI" -EnableInheritance
@@ -508,55 +519,57 @@
         #  }
           
         #Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2ConnServerName -source SG-Horizon7-Client,SG-Horizon7-ConnServer -service $SVHZN7Client2ConnServerHTTPName,$SVHZN7Client2ConnServerHTTPSName -action "allow" -AppliedTo SG-Horizon7-Client,SG-Horizon7-ConnServer
-        
-        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2ConnServerName -source $SGHZN7ClientName -destination $SGHZN7ConnServerName -service $SVHZN7Client2ConnServerHTTPName,$SVHZN7Client2ConnServerHTTPSName -action allow -AppliedTo $SGHZN7ClientName,$SGHZN7ConnServerName -Position Top
-        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2AgentName -source $SGHZN7ClientName -destination $SGHZN7VDIName -service $SVHZN7BEClient2AgentTCPName,$SVHZN7BEClient2AgentUDPName,$SVHZN7PCOIPClient2AgentTCPName,$SVHZN7PCOIPClient2AgentUDPName$SVHZN7RDPClient2AgentName,$SVHZN7CDRMMRClient2AgentName,$SVHZN7USBClient2AgentName -action allow -AppliedTo $SGHZN7ClientName,$SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
-        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentHTMLName -source any -destination $SGHZN7VDIName -service $SVHZN7Browser2AgentHTMLName -action allow -AppliedTo $SGHZN7VDIName -Position Top
-        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2VIDMName -source any -destination $SGHZN7vIDMName -service $SVHZN7Browser2VIDMName -action allow -AppliedTo $SGHZN7vIDMName -Position Top
-        Get-NsxFirewallSection $SNHZN7ConnExternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2UAGName -source $SGHZN7ClientName -destination $SGHZN7UAGName -service $SVHZN7Client2UAGName -action allow -AppliedTo $SGHZN7ClientName,$SGHZN7UAGName -Position Top
-        Get-NsxFirewallSection $SNHZN7ConnExternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2UAGHTMLName -source any -destination $SGHZN7UAGName -service $SVHZN7Browser2UAGHTMLName -action allow -AppliedTo $SGHZN7UAGName -Position Top
-        Get-NsxFirewallSection $SNHZN7ConnExternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2UAGVIDMName -source any -destination $SGHZN7UAGName -service $SVHZN7Browser2UAGVIDMName -action allow -AppliedTo $SGHZN7UAGName -Position Top
-        Get-NsxFirewallSection $SNHZN7ConnTunneledSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2ConnServerTunnName -source $SGHZN7ClientName -destination $SGHZN7ConnServerName -service $SVHZN7Client2ConnServerTunnHTTPSName,$SVHZN7Client2ConnServerTunnHTTPName,$SVHZN7BEClient2ConnServerTCPName,$SVHZN7PCOIPClient2ConnServerTCPName,$SVHZN7PCOIPClient2ConnServerUDPName -action allow -AppliedTo $SGHZN7ClientName,$SGHZN7ConnServerName -Position Top
-        Get-NsxFirewallSection $SNHZN7ConnTunneledSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentTunnName -source any -destination $SGHZN7ConnServerName -service $SVHZN7Browser2AgentTunnHTMLName -action allow -AppliedTo $SGHZN7ConnServerName -Position Top
-        Get-NsxFirewallSection $SNHZN7ConnTunneledSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2VIDMTunnName -source any -destination $SGHZN7vIDMName -service $SVHZN7Browser2VIDMTunnName -action allow -AppliedTo $SGHZN7vIDMName -Position Top
-        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2ConnServerName -source $SGHZN7VDIName -destination $SGHZN7ConnServerName -service $SVHZN7Agent2ConnServerEnhancedName,$SVHZN7Agent2ConnServerLegacyName -action allow -AppliedTo $SGHZN7ConnServerName -Position Top
-        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2V4HName -source $SGHZN7VDIName -destination $SGHZN7V4HName -service $SVHZN7Agent2V4HRMIName,$SVHZN7Agent2V4HDMSName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName,$SGHZN7V4HName -Position Top
-        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNAPPVAgent2APPVMGRName -source $SGHZN7VDIName -destination $SGHZN7AppVolMgrName -service $SVAPPVAgent2APPVMGRSSLName,$SVAPPVAgent2APPVMGRSTDName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName,$SGHZN7AppVolMgrName -Position Top
-        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNUEMMGR2UEMFSSMBName -source $SGHZN7VDIName -destination $SGHZN7UEM_FSName -service $SVUEMMGR2UEMFSSMBName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName,$SGHZN7UEM_FSName -Position Top
-        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7BlockVDI2VDIName -source $SGHZN7vIDMName -Destination $SGHZN7vIDMName -service any -Action deny -AppliedTo $SGHZN7VDIName
-        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServ2AgentTunnName -source $SGHZN7ConnServerName -destination $SGHZN7VDIName -service $SVHZN7BEConnServ2AgentTunnName,$SVHZN7PCOIPConnServ2AgentTunnTCPName,$SVHZN7PCOIPConnServ2AgentTunnUDPName,$SVHZN7RDPConnServer2AgentTunnName,$SVHZN7CDRMMRConnServer2AgentTunnName,$SVHZN7USBClient2AgentUSBTunnName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2vCenterName -source $SGHZN7ConnServerName -destination $SGHZN7vCenterMGMTName -service $SVHZN7ConnServer2vCenterSOAPName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7vCenterMGMTName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2CompName -source $SGHZN7ConnServerName -destination $SGHZN7ComposerName -service $SVHZN7ConnServer2CompSOAPName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7ComposerName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2ConnServerName -source $SGHZN7ConnServerName -destination $SGHZN7ConnServerName -service $SVHZN7ConnServer2ConnServerJMSLegacyName,$SVHZN7ConnServer2ConnServerJMSSSLName,$SVHZN7CPALDAPREPLName,$SVHZN7CPALDAPREPLSSLName,$SVHZCPAInterPodVIPAName,$SVHZN7ConnServerInstallReplicaName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7ConnServerName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2EnrollmentName -source $SGHZN7ConnServerName -destination $SGHZN7EnrollServerName -service $SVHZN7ConnServer2EnrollmentName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7EnrollServerName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2VIDMName -source $SGHZN7ConnServerNam -destination $SGHZN7vIDMName -service $SVHZN7ConnServer2VIDMName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7vIDMName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2V4HName -source $SGHZN7ConnServerName -destination $SGHZN7V4HName -service $SVHZN7ConnServer2V4HRMIName,$SVHZN7ConnServer2V4HBMSName,$SVHZN7ConnServer2V4HCMSName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7V4HName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer22FAMGRName -source $SGHZN7ConnServerName -destination $SGHZN7AirWatchName -service $SVHZN7ConnServer22FAMGRName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7AirWatchName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravCenterViewCompSectionName  | New-NsxFirewallRule -Name $RNvCenter2ESXiName -source $SGHZN7vCenterVDI_RDSHName -destination $IPHorizon7VDIESXi -service $SVvCenter2ESXiSOAPName -action allow -AppliedTo $SGHZN7vCenterVDI_RDSHName,$IPHorizon7VDIESXi -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravCenterViewCompSectionName  | New-NsxFirewallRule -Name $RNHZN7Comp2vCenterName -source $SGHZN7ComposerName -destination $SGHZN7vCenterVDI_RDSHName -service $SVHZN7Comp2vCenterSOAPName -action allow -AppliedTo $SGHZN7ComposerName,$SGHZN7vCenterVDI_RDSHName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravCenterViewCompSectionName  | New-NsxFirewallRule -Name $RNHZN7Comp2ESXiName -source $SGHZN7ComposerName -destination $IPHorizon7VDIESXi -service $SVHZN7Comp2ESXiSOAPName -action allow -AppliedTo $SGHZN7ComposerName,$IPHorizon7VDIESXi -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraUAGSectionName  | New-NsxFirewallRule -Name $RNHZN7UAG2ConnServerName -source $SGHZN7UAGName -destination $SGHZN7ConnServerName -service $SVHZN7UAG2ConnServerLoginName -action allow -AppliedTo $SGHZN7UAGName,$SGHZN7ConnServerName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraUAGSectionName  | New-NsxFirewallRule -Name $RNHZN7UAG2AgentName -source $SGHZN7UAGName -destination $SGHZN7VDIName -service $SVHZN7BEUAG2AgentTCPName,$SVHZN7BEUAG2AgentUDPName,$SVHZN7PCOIP2AgentTCPName,$SVHZN7PCOIP2AgentUDPName,$SVHZN7RDPUAG2AgentName,$SVHZN7CDRMMRUAG2AgentName,$SVHZN7USBUAG2AgentName,$SVHZN7UAG2AgentName,$SVHZN7UAG22FAMGRName -action allow -AppliedTo $SGHZN7UAGName,$SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2ConnServerName -source $SGHZN7vIDMNam -destination $SGHZN7ConnServerName -service $SVHZN7VIDM2ConnServerLDAPName,$SVHZN7VIDM2ConnServerHTTPSName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7ConnServerName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2VIDMName -source $SGHZN7vIDMName -destination $SGHZN7vIDMName -service $SVHZN7VIDM2VIDMHTTPSName,$SVHZN7VIDM2VIDMAuditName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7vIDMName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2SMTPName -source $SGHZN7vIDMName -destination $SGHZN7SMTPName -service $SVHZN7VIDM2SMTPName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7SMTPName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2DCName -source $SGHZN7vIDMName -destination $SGHZN7DomainCtrlName -service $SVHZN7VIDM2DCLDAPName,$SVHZN7VIDM2DCKerberosTCPName,$SVHZN7VIDM2DCKerberosUDPName,$SVHZN7VIDM2DCKerberosPWDTCPName,$SVHZN7VIDM2DCKerberosPWDUDPName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7DomainCtrlName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2DNSName -source $SGHZN7vIDMName -destination $SGHZN7DNSName -service $SVHZN7VIDM2DNSTCPName,$SVHZN7VIDM2DNSUDPName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7DNSName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2CTXBName -source $SGHZN7vIDMName -destination $SGHZN7CitrixName -service $SVHZN7VIDM2CTXBSTDName,$SVHZN7VIDM2CTXSSLName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7CitrixName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2ThinAppFSName -source $SGHZN7vIDMName -destination $SGHZN7ThinApp_FSName -service $SVHZN7VIDM2ThinAppFSSMBName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7ThinApp_FSName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2UpgradeServerName -source $SGHZN7vIDMName -destination $IPHorizon7UpdateServer -service $SVHZN7VIDM2UpgradeServerName -action allow -AppliedTo $SGHZN7vIDMName,$IPHorizon7UpdateServer -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM22FAMGRName -source $SGHZN7vIDMName -destination $SGHZN7AirWatchName -service $SVHZN7VIDM22FAMGRName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7AirWatchName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2AirWatchName -source $SGHZN7vIDMName -destination $SGHZN7AirWatchName -service $SVHZN7VIDM2AirWatchRESTAPIName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7AirWatchName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2Name -source $SGHZN7vIDMName -destination $SGHZN7DatabaseName -service $SVHZN7VIDM2MSSQLName,$SVHZN7VIDM2PostgreSQLName,$SVHZN7VIDM2OracleName -action allow -AppliedTo $SGHZN7vIDMName,$SGHZN7DatabaseName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraAppVolMgrSectionName  | New-NsxFirewallRule -Name $RNHZN7APPVMGR2vCenterName -source $SGHZN7AppVolMgrName -destination $SGHZN7vCenterVDI_RDSHName -service $SVHZN7APPVMGR2vCenterSOAPName -action allow -AppliedTo $SGHZN7AppVolMgrName,$SGHZN7vCenterVDI_RDSHName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraAppVolMgrSectionName  | New-NsxFirewallRule -Name $RNHZN7APPVMGR2ESXiName -source $SGHZN7AppVolMgrName -destination $IPHorizon7VDIESXi -service $SVHZN7APPVMGR2ESXiName -action allow -AppliedTo $SGHZN7AppVolMgrName,$IPHorizon7VDIESXi -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraAppVolMgrSectionName  | New-NsxFirewallRule -Name $RNHZN7APPVMGR2Name -source $SGHZN7AppVolMgrName -destination $SGHZN7DatabaseName -service $SVHZN7APPVMGR2MSSQLName -action allow -AppliedTo $SGHZN7AppVolMgrName,$SGHZN7DatabaseName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2ConnServerName -source $SGHZN7V4HName -destination $SGHZN7ConnServerName -service $SVV4H2ConnServerRMIName,$SVV4H2ConnServerBMSName,$SVV4H2ConnServerCMSName -action allow -AppliedTo $SGHZN7V4HName,$SGHZN7ConnServerName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2AgentName -source $SGHZN7V4HName -destination $SGHZN7vCenterMGMTName -service $SVV4H2AgentRMIName,$SVV4H2AgentDMSName -action allow -AppliedTo $SGHZN7V4HName,$SGHZN7vCenterMGMTName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2UAGMonitorName -source $SGHZN7V4HName -destination $SGHZN7UAGName -service $SVV4H2UAGMonitorName -action allow -AppliedTo $SGHZN7V4HName,$SGHZN7UAGName -Position Top
-        Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2APPVMGRMonitorName -source $SGHZN7V4HName -destination $SGHZN7AppVolMgrName -service $SVV4H2APPVMGRMonitorName -action allow -AppliedTo $SGHZN7V4HName,$SGHZN7AppVolMgrName -Position Top
-        Get-NsxFirewallSection $SNHHZN7InfraMgmtSectionName  | New-NsxFirewallRule -Name $RNHZN7Admin2Name -source $SGHZN7AdminConsoleName -destination $SGHZN7ConnServerName -service $SVHZN7Admin2ConnServerName,$SVHZN7Admin2vCenterName,$SVHZN7Admin2APPVMGRName,$SVHZN7Admin2VIDMName -action allow -AppliedTo $SGHZN7AdminConsoleName,$SGHZN7ConnServerName -Position Top
-        Get-NsxFirewallSection $SNHHZN7InfraMgmtSectionName  | New-NsxFirewallRule -Name $RNHZN7Admin2UAGName -source $SGHZN7AdminConsoleName -destination $SGHZN7V4HName -service $SVHZN7Admin2V4HName -action allow -AppliedTo $SGHZN7AdminConsoleName,$SGHZN7V4HName -Position Top
-        Get-NsxFirewallSection $SNHHZN7InfraMgmtSectionName  | New-NsxFirewallRule -Name $RNHZN7Admin2VIDMName -source $SGHZN7AdminConsoleName -destination $SGHZN7UAGName -service $SVHZN7Admin2UAGName -action allow -AppliedTo $SGHZN7AdminConsoleName,$SGHZN7UAGName -Position Top
 
+        Write-host -ForegroundColor Green "Creating Firewall Rules"
+        
+        
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2ConnServerName -source $SGHZN7Client -destination $SGHZN7ConnServer -service $SVHZN7Client2ConnServerHTTP,$SVHZN7Client2ConnServerHTTPS -action allow -AppliedTo $SGHZN7Client,$SGHZN7ConnServer -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2AgentName -source $SGHZN7Client -destination $SGHZN7VDI -service $SVHZN7BEClient2AgentTCP,$SVHZN7BEClient2AgentUDP,$SVHZN7PCOIPClient2AgentTCP,$SVHZN7PCOIPClient2AgentUDP$SVHZN7RDPClient2Agent,$SVHZN7CDRMMRClient2Agent,$SVHZN7USBClient2Agent -action allow -AppliedTo $SGHZN7Client,$SGHZN7VDI,$SGHZN7RDSHost -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentHTMLName -destination $SGHZN7VDI -service $SVHZN7Browser2AgentHTML -action allow -AppliedTo $SGHZN7VDI -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2VIDMName  -destination $SGHZN7vIDM -service $SVHZN7Browser2VIDM -action allow -AppliedTo $SGHZN7vIDM -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnExternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2UAGName -source $SGHZN7Client -destination $SGHZN7UAG -service $SVHZN7Client2UAG -action allow -AppliedTo $SGHZN7Client,$SGHZN7UAG -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnExternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2UAGHTMLName  -destination $SGHZN7UAG -service $SVHZN7Browser2UAGHTML -action allow -AppliedTo $SGHZN7UAG -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnExternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2UAGVIDMName  -destination $SGHZN7UAG -service $SVHZN7Browser2UAGVIDM -action allow -AppliedTo $SGHZN7UAG -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnTunneledSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2ConnServerTunnName -source $SGHZN7Client -destination $SGHZN7ConnServer -service $SVHZN7Client2ConnServerTunnHTTPS,$SVHZN7Client2ConnServerTunnHTTP,$SVHZN7BEClient2ConnServerTCP,$SVHZN7PCOIPClient2ConnServerTCP,$SVHZN7PCOIPClient2ConnServerUDP -action allow -AppliedTo $SGHZN7Client,$SGHZN7ConnServer -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnTunneledSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentTunnName  -destination $SGHZN7ConnServer -service $SVHZN7Browser2AgentTunnHTML -action allow -AppliedTo $SGHZN7ConnServer -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnTunneledSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2VIDMTunnName  -destination $SGHZN7vIDM -service $SVHZN7Browser2VIDMTunn -action allow -AppliedTo $SGHZN7vIDM -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2ConnServerName -source $SGHZN7VDI -destination $SGHZN7ConnServer -service $SVHZN7Agent2ConnServerEnhanced,$SVHZN7Agent2ConnServerLegacy -action allow -AppliedTo $SGHZN7ConnServer -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2V4HName -source $SGHZN7VDI -destination $SGHZN7V4H -service $SVHZN7Agent2V4HRMI,$SVHZN7Agent2V4HDMS -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7V4H -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNAPPVAgent2APPVMGRName -source $SGHZN7VDI -destination $SGHZN7AppVolMgr -service $SVAPPVAgent2APPVMGRSSL,$SVAPPVAgent2APPVMGRSTD -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7AppVolMgr -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNUEMMGR2UEMFSSMBName -source $SGHZN7VDI -destination $SGHZN7UEM_FS -service $SVUEMMGR2UEMFSSMB -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7UEM_FS -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7BlockVDI2VDIName -source $SGHZN7VDI,$SGHZN7RDSHost -destination $SGHZN7VDI,$SGHZN7RDSHost -action deny -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServ2AgentTunnName -source $SGHZN7ConnServer -destination $SGHZN7VDI -service $SVHZN7BEConnServ2AgentTunn,$SVHZN7PCOIPConnServ2AgentTunnTCP,$SVHZN7PCOIPConnServ2AgentTunnUDP,$SVHZN7RDPConnServer2AgentTunn,$SVHZN7CDRMMRConnServer2AgentTunn,$SVHZN7USBClient2AgentUSBTunn -action allow -AppliedTo $SGHZN7ConnServer,$SGHZN7VDI,$SGHZN7RDSHost -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2vCenterName -source $SGHZN7ConnServer -destination $SGHZN7vCenterMGMT -service $SVHZN7ConnServer2vCenterSOAP -action allow -AppliedTo $SGHZN7ConnServer,$SGHZN7vCenterMGMT -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2CompName -source $SGHZN7ConnServer -destination $SGHZN7Composer -service $SVHZN7ConnServer2CompSOAP -action allow -AppliedTo $SGHZN7ConnServer,$SGHZN7Composer -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2ConnServerName -source $SGHZN7ConnServer -destination $SGHZN7ConnServer -service $SVHZN7ConnServer2ConnServerJMSLegacy,$SVHZN7ConnServer2ConnServerJMSSSL,$SVHZN7CPALDAPREPL,$SVHZN7CPALDAPREPLSSL,$SVHZCPAInterPodVIPA,$SVHZN7ConnServerInstallReplica -action allow -AppliedTo $SGHZN7ConnServer,$SGHZN7ConnServer -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2EnrollmentName -source $SGHZN7ConnServer -destination $SGHZN7EnrollServer -service $SVHZN7ConnServer2Enrollment -action allow -AppliedTo $SGHZN7ConnServer,$SGHZN7EnrollServer -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2VIDMName -source $SGHZN7ConnServer -destination $SGHZN7vIDM -service $SVHZN7ConnServer2VIDM -action allow -AppliedTo $SGHZN7ConnServer,$SGHZN7vIDM -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer2V4HName -source $SGHZN7ConnServer -destination $SGHZN7V4H -service $SVHZN7ConnServer2V4HRMI,$SVHZN7ConnServer2V4HBMS,$SVHZN7ConnServer2V4HCMS -action allow -AppliedTo $SGHZN7ConnServer,$SGHZN7V4H -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraConnServerSectionName  | New-NsxFirewallRule -Name $RNHZN7ConnServer22FAMGRName -source $SGHZN7ConnServer -destination $SGHZN7AirWatch -service $SVHZN7ConnServer22FAMGR -action allow -AppliedTo $SGHZN7ConnServer,$SGHZN7AirWatch -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravCenterViewCompSectionName  | New-NsxFirewallRule -Name $RNvCenter2ESXiName -source $SGHZN7vCenterVDI_RDSH -destination $IPHorizon7VDIESXi -service $SVvCenter2ESXiSOAP -action allow -AppliedTo $SGHZN7vCenterVDI_RDSH,$IPHorizon7VDIESXi -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravCenterViewCompSectionName  | New-NsxFirewallRule -Name $RNHZN7Comp2vCenterName -source $SGHZN7Composer -destination $SGHZN7vCenterVDI_RDSH -service $SVHZN7Comp2vCenterSOAP -action allow -AppliedTo $SGHZN7Composer,$SGHZN7vCenterVDI_RDSH -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravCenterViewCompSectionName  | New-NsxFirewallRule -Name $RNHZN7Comp2ESXiName -source $SGHZN7Composer -destination $IPHorizon7VDIESXi -service $SVHZN7Comp2ESXiSOAP -action allow -AppliedTo $SGHZN7Composer,$IPHorizon7VDIESXi -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraUAGSectionName  | New-NsxFirewallRule -Name $RNHZN7UAG2ConnServerName -source $SGHZN7UAG -destination $SGHZN7ConnServer -service $SVHZN7UAG2ConnServerLogin -action allow -AppliedTo $SGHZN7UAG,$SGHZN7ConnServer -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraUAGSectionName  | New-NsxFirewallRule -Name $RNHZN7UAG2AgentName -source $SGHZN7UAG -destination $SGHZN7VDI -service $SVHZN7BEUAG2AgentTCP,$SVHZN7BEUAG2AgentUDP,$SVHZN7PCOIP2AgentTCP,$SVHZN7PCOIP2AgentUDP,$SVHZN7RDPUAG2Agent,$SVHZN7CDRMMRUAG2Agent,$SVHZN7USBUAG2Agent,$SVHZN7UAG2Agent,$SVHZN7UAG22FAMGR -action allow -AppliedTo $SGHZN7UAG,$SGHZN7VDI,$SGHZN7RDSHost -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2ConnServerName -source $SGHZN7vIDM -destination $SGHZN7ConnServer -service $SVHZN7VIDM2ConnServerLDAP,$SVHZN7VIDM2ConnServerHTTPS -action allow -AppliedTo $SGHZN7vIDM,$SGHZN7ConnServer -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2VIDMName -source $SGHZN7vIDM -destination $SGHZN7vIDM -service $SVHZN7VIDM2VIDMHTTPS,$SVHZN7VIDM2VIDMAudit -action allow -AppliedTo $SGHZN7vIDM,$SGHZN7vIDM -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2SMTPName -source $SGHZN7vIDM -destination $SGHZN7SMTP -service $SVHZN7VIDM2SMTP -action allow -AppliedTo $SGHZN7vIDM,$SGHZN7SMTP -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2DCName -source $SGHZN7vIDM -destination $SGHZN7DomainCtrl -service $SVHZN7VIDM2DCLDAP,$SVHZN7VIDM2DCKerberosTCP,$SVHZN7VIDM2DCKerberosUDP,$SVHZN7VIDM2DCKerberosPWDTCP,$SVHZN7VIDM2DCKerberosPWDUDP -action allow -AppliedTo $SGHZN7vIDM,$SGHZN7DomainCtrl -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2DNSName -source $SGHZN7vIDM -destination $SGHZN7DNS -service $SVHZN7VIDM2DNSTCP,$SVHZN7VIDM2DNSUDP -action allow -AppliedTo $SGHZN7vIDM,$SGHZN7DNS -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2CTXBName -source $SGHZN7vIDM -destination $SGHZN7Citrix -service $SVHZN7VIDM2CTXBSTD,$SVHZN7VIDM2CTXSSL -action allow -AppliedTo $SGHZN7vIDM,$SGHZN7Citrix -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2ThinAppFSName -source $SGHZN7vIDM -destination $SGHZN7ThinApp_FS -service $SVHZN7VIDM2ThinAppFSSMB -action allow -AppliedTo $SGHZN7vIDM,$SGHZN7ThinApp_FS -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2UpgradeServerName -source $SGHZN7vIDM -destination $IPHorizon7UpdateServer -service $SVHZN7VIDM2UpgradeServer -action allow -AppliedTo $SGHZN7vIDM,$IPHorizon7UpdateServer -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM22FAMGRName -source $SGHZN7vIDM -destination $SGHZN7AirWatch -service $SVHZN7VIDM22FAMGR -action allow -AppliedTo $SGHZN7vIDM,$SGHZN7AirWatch -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2AirWatchName -source $SGHZN7vIDM -destination $SGHZN7AirWatch -service $SVHZN7VIDM2AirWatchRESTAPI -action allow -AppliedTo $SGHZN7vIDM,$SGHZN7AirWatch -Position Top
+        Get-NsxFirewallSection $SNHZN7InfravIDMSectionName  | New-NsxFirewallRule -Name $RNHZN7VIDM2Name -source $SGHZN7vIDM -destination $SGHZN7Database -service $SVHZN7VIDM2MSSQL,$SVHZN7VIDM2PostgreSQL,$SVHZN7VIDM2Oracle -action allow -AppliedTo $SGHZN7vIDM,$SGHZN7Database -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraAppVolMgrSectionName  | New-NsxFirewallRule -Name $RNHZN7APPVMGR2vCenterName -source $SGHZN7AppVolMgr -destination $SGHZN7vCenterVDI_RDSH -service $SVHZN7APPVMGR2vCenterSOAP -action allow -AppliedTo $SGHZN7AppVolMgr,$SGHZN7vCenterVDI_RDSH -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraAppVolMgrSectionName  | New-NsxFirewallRule -Name $RNHZN7APPVMGR2ESXiName -source $SGHZN7AppVolMgr -destination $IPHorizon7VDIESXi -service $SVHZN7APPVMGR2ESXi -action allow -AppliedTo $SGHZN7AppVolMgr,$IPHorizon7VDIESXi -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraAppVolMgrSectionName  | New-NsxFirewallRule -Name $RNHZN7APPVMGR2Name -source $SGHZN7AppVolMgr -destination $SGHZN7Database -service $SVHZN7APPVMGR2MSSQL -action allow -AppliedTo $SGHZN7AppVolMgr,$SGHZN7Database -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2ConnServerName -source $SGHZN7V4H -destination $SGHZN7ConnServer -service $SVV4H2ConnServerRMI,$SVV4H2ConnServerBMS,$SVV4H2ConnServerCMS -action allow -AppliedTo $SGHZN7V4H,$SGHZN7ConnServer -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2AgentName -source $SGHZN7V4H -destination $SGHZN7vCenterMGMT -service $SVV4H2AgentRMI,$SVV4H2AgentDMS -action allow -AppliedTo $SGHZN7V4H,$SGHZN7vCenterMGMT -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2UAGMonitorName -source $SGHZN7V4H -destination $SGHZN7UAG -service $SVV4H2UAGMonitor -action allow -AppliedTo $SGHZN7V4H,$SGHZN7UAG -Position Top
+        Get-NsxFirewallSection $SNHZN7InfraV4HSectionName  | New-NsxFirewallRule -Name $RNV4H2APPVMGRMonitorName -source $SGHZN7V4H -destination $SGHZN7AppVolMgr -service $SVV4H2APPVMGRMonitor -action allow -AppliedTo $SGHZN7V4H,$SGHZN7AppVolMgr -Position Top
+        Get-NsxFirewallSection $SNHHZN7InfraMgmtSectionName  | New-NsxFirewallRule -Name $RNHZN7Admin2Name -source $SGHZN7AdminConsole -destination $SGHZN7ConnServer -service $SVHZN7Admin2ConnServer,$SVHZN7Admin2vCenter,$SVHZN7Admin2APPVMGR,$SVHZN7Admin2VIDM -action allow -AppliedTo $SGHZN7AdminConsole,$SGHZN7ConnServer -Position Top
+        Get-NsxFirewallSection $SNHHZN7InfraMgmtSectionName  | New-NsxFirewallRule -Name $RNHZN7Admin2UAGName -source $SGHZN7AdminConsole -destination $SGHZN7V4H -service $SVHZN7Admin2V4H -action allow -AppliedTo $SGHZN7AdminConsole,$SGHZN7V4H -Position Top
+        Get-NsxFirewallSection $SNHHZN7InfraMgmtSectionName  | New-NsxFirewallRule -Name $RNHZN7Admin2VIDMName -source $SGHZN7AdminConsole -destination $SGHZN7UAG -service $SVHZN7Admin2UAG -action allow -AppliedTo $SGHZN7AdminConsole,$SGHZN7UAG -Position Top
     
