@@ -136,16 +136,23 @@
         #Build New Security Groups
         Write-host -ForegroundColor Green "Creating Security Groups"
 
-        $SGHZN7ConnServer = New-NsxSecurityGroup -name $SGHZN7ConnServerName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7ConnServerVIPName,Get-NsxIpSet -Name $IPHorizon7ConnServerName)
+        $SGHZN7ConnServer = New-NsxSecurityGroup -name $SGHZN7ConnServerName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7ConnServerVIPName
+        Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7ConnServerName) -Member (Get-NsxIpSet -Name $IPHorizon7ConnServerName)
         $SGHZN7VDI = New-NsxSecurityGroup -name $SGHZN7VDIName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7VDIRDSHName)
         $SGHZN7RDSHost = New-NsxSecurityGroup -name $SGHZN7RDSHostName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7VDIRDSHName)
-        $SGHZN7AppVolMgr = New-NsxSecurityGroup -name $SGHZN7AppVolMgrName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7AppVolName,Get-NsxIpSet -Name $IPHorizon7AppVolVIPName)
+        $SGHZN7AppVolMgr = New-NsxSecurityGroup -name $SGHZN7AppVolMgrName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7AppVolName;Get-NsxIpSet -Name $IPHorizon7AppVolVIPName)
         $SGHZN7UEM_FS = New-NsxSecurityGroup -name $SGHZN7UEM_FSName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7UEM_FSName)
         $SGHZN7DomainCtrl = New-NsxSecurityGroup -name $SGHZN7DomainCtrlName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7DomainCtrlName)
         $SGHZN7DNS = New-NsxSecurityGroup -name $SGHZN7DNSName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7DNSName)
         $SGHZN7V4H = New-NsxSecurityGroup -name $SGHZN7V4HName -IncludeMember (Get-NsxIpSet -name $IPHorizon7V4HName)
-        $SGHZN7BlockAll = New-NsxSecurityGroup -name $SGHZN7BlockAllName -IncludeMember (Get-NsxSecurityGroup -Name $SGHZN7DNSName,Get-NsxSecurityGroup -Name $SGHZN7AppVolMgrName,Get-NsxSecurityGroup -Name $SGHZN7ConnServerName,
-        Get-NsxSecurityGroup -Name $SGHZN7DomainCtrlName,Get-NsxSecurityGroup -Name $SGHZN7RDSHostName,Get-NsxSecurityGroup -Name $SGHZN7UEM_FSName,Get-NsxSecurityGroup -Name $SGHZN7V4HName,Get-NsxSecurityGroup -Name $SGHZN7VDIName)
+        $SGHZN7BlockAll = New-NsxSecurityGroup -name $SGHZN7BlockAllName -IncludeMember (Get-NsxSecurityGroup -Name $SGHZN7DNSName)
+        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7AppVolMgrName)
+        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7ConnServerName)
+        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7DomainCtrlName)
+        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7RDSHostName)
+        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7UEM_FSName)
+        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7V4HName)
+        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7VDIName)
               
         #Build New Services
         Write-host -ForegroundColor Green "Creating Services"
@@ -171,12 +178,12 @@
         Write-host -ForegroundColor Green "Creating Firewall Rules"
 
         Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2AgentName -destination $SGHZN7VDI -service $SVHZN7BEClient2AgentTCP,$SVHZN7BEClient2AgentUDP,$SVHZN7PCOIPClient2AgentTCP,$SVHZN7PCOIPClient2AgentUDP,$SVHZN7RDPClient2Agent,$SVHZN7CDRMMRClient2Agent,$SVHZN7USBClient2Agent -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost -Position Top
-        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentHTMLName -destination $SGHZN7VDI -service $SVHZN7Browser2AgentHTML -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHostName -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentHTMLName -destination $SGHZN7VDI -service $SVHZN7Browser2AgentHTML -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost -Position Top
         Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2ConnServerName -source $SGHZN7VDI -destination $SGHZN7ConnServer -service $SVHZN7Agent2ConnServerEnhanced,$SVHZN7Agent2ConnServerLegacy -action allow -AppliedTo $SGHZN7ConnServer,$SGHZN7VDI,$SGHZN7RDSHost -Position Top
         Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2V4HName -source $SGHZN7VDI -destination $SGHZN7V4H -service $SVHZN7Agent2V4HRMI,$SVHZN7Agent2V4HDMS -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7V4H -Position Top
         Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNAPPVAgent2APPVMGRName -source $SGHZN7VDI -destination $SGHZN7AppVolMgr -service $SVAPPVAgent2APPVMGRSSL,$SVAPPVAgent2APPVMGRSTD -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7AppVolMgr -Position Top
         Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNUEMMGR2UEMFSSMBName -source $SGHZN7VDI -destination $SGHZN7UEM_FS -service $SVUEMMGR2UEMFSSMB -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7UEM_FS -Position Top
-        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7BlockVDI2VDIName -source $SGHZN7VDI,$SGHZN7RDSHost -Destination $SGHZN7vIDM,$SGHZN7RDSHost -service any -Action deny -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7BlockVDI2VDIName -source $SGHZN7VDI,$SGHZN7RDSHost -Destination $SGHZN7vIDM,$SGHZN7RDSHost -service any -Action deny -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost -Position Bottom
  
 
     
