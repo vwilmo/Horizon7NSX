@@ -1,0 +1,165 @@
+#Script
+    param (
+        ##Creating Horizon 7 Groupings
+        
+        #Security Groups
+        $SGHZN7ConnServerName = "SG-Horizon7-ConnServer",
+        $SGHZN7VDIName = "SG-Horizon7-VDI",
+        $SGHZN7RDSHostName = "SG-Horizon7-RDSHost",
+        $SGHZN7DomainCtrlName = "SG-Horizon7-DomainCtrl",
+        $SGHZN7DNSName = "SG-Horizon7-DNS",
+        $SGHZN7UEM_FSName = "SG-Horizon7-UEM_FS",
+        $SGHZN7AppVolMgrName = "SG-Horizon7-AppVolMgr",
+        $SGHZN7BlockAllName = "SG-Horizon7-BLOCK",
+        $SGHZN7V4HName = "SG-Horizon7-V4H",
+        
+        #Security Tags
+        $STHZN7ConnServerName = "ST-Horizon7-ConnServer",
+        $STHZN7VDIName = "ST-Horizon7-VDI",
+        $STHZN7RDSHostName = "ST-Horizon7-RDSHost",
+        $STHZN7DomainCtrlName = "ST-Horizon7-DomainCtrl",
+        $STHZN7DNSName = "ST-Horizon7-DNS",
+        $STHZN7UEM_FSName = "ST-Horizon7-UEM_FS",
+        $STHZN7AppVolMgrName = "ST-Horizon7-AppVolMgr",
+        $STHZN7V4HName = "ST-Horizon7-V4H",
+                
+        #DFW Firewall Section Names
+        $SNHZN7ConnInternalSectionName = "Horizon 7 Connectivity - Internal Connections",
+        $SNHZN7DesktopVDI_RDSHSectionName = "Horizon 7 Desktops - VDI or RDS Host",
+        $SNHZN7BlockAllName = "Horizon 7 Connectivity - Block All"    
+        
+        #DFW Rule Names
+        $RNHZN7Client2AgentName = "Internal - Horizon Client to Horizon Agent",
+        $RNHZN7Browser2AgentHTMLName = "Internal - Browser to Horizon Agent HTML",
+        $RNHZN7Agent2ConnServerName = "Desktops - Horizon Agent to View Connection Server JMS",
+        $RNHZN7Agent2V4HName = "Desktops - Horizon Agent to V4H",
+        $RNAPPVAgent2APPVMGRName = "Desktops - App Volumes Agent to App Volumes Manager",
+        $RNUEMMGR2UEMFSSMBName = "Desktops - UEM Flex Engine to UEM File Servers",
+        $RNHZN7BlockVDI2VDIName = "Desktops - Block VDI to VDI",
+        
+        #Service Names
+
+        $SVHZN7BEClient2AgentTCPName = "Horizon 7 Blast Extreme TCP Excellent Typical Horizon Client to Horizon Agent",
+        $SVHZN7BEClient2AgentUDPName = "Horizon 7 Blast Extreme UDP Typical Horizon Client to Horizon Agent",
+        $SVHZN7PCOIPClient2AgentTCPName = "Horizon 7 PCoIP TCP Horizon Client to Horizon Agent",
+        $SVHZN7PCOIPClient2AgentUDPName = "Horizon 7 PCoIP UDP Horizon Client to Horizon Agent",
+        $SVHZN7RDPClient2AgentName = "Horizon 7 RDP Horizon Client to Horizon Agent",
+        $SVHZN7CDRMMRClient2AgentName = "Horizon 7 CDR MMR Horizon Client to Horizon Agent",
+        $SVHZN7USBClient2AgentName = "Horizon 7 USB Horizon Client to Horizon Agent USB Redirection",
+        $SVHZN7Browser2AgentHTMLName = "Horizon 7 Browser to Horizon Agent HTML Access",
+        $SVHZN7Agent2ConnServerEnhancedName = "Horizon 7 JMS Horizon Agent to Connection Server Enhanced",
+        $SVHZN7Agent2ConnServerLegacyName = "Horizon 7 JMS Horizon Agent to Connection Server Legacy",
+        $SVHZN7Agent2V4HRMIName = "Horizon 7 Horizon Agent to V4H RMI",
+        $SVHZN7Agent2V4HDMSName = "Horizon 7 Horizon Agent to V4H Desktop Message Server",
+        $SVAPPVAgent2APPVMGRSSLName = "App Volumes Agent to App Volumes Manager SSL",
+        $SVAPPVAgent2APPVMGRSTDName = "App Volumes Agent to App Volumes Manager Standard",
+        
+        #IP Sets for VIPs and other
+        $IPHorizon7ConnServerVIP = "IP-Horizon7-ConnServer-VIP",
+        $IPHorizon7ConnServer = "IP-Horizon7-ConnServer"
+        $IPHorizon7UAGVIP = "IP-Horizon7-UAG-VIP",
+        $IPHorizon7AppVolVIP = "IP-Horizon7-AppVol-VIP",
+        $IPHorizon7AppVol = "IP-Horizon7-AppVol",
+        $IPHorizon7VDIRDSH = "IP-Horizon7-VDI-RDSH",
+        $IPHorizon7UEM_FS = "IP-Horizon7-UEM_FS",
+        $IPHorizon7V4H = "IP-Horizon7-V4H",
+        $IPHorizon7DomainCtrl = "IP-Horizon7-DomainCtrl",
+        $IPHorizon7DNS = "IP-Horizon7-DNS",
+        
+        #Service Port and Protocol
+        
+        #Protocol
+        $TCP = "tcp",
+        $UDP = "udp",
+        
+        #Port
+        $80 = "80",
+        $443 = "443",
+        $22443 = "22443",
+        $4172 = "4172",
+        $3389 = "3389",
+        $9427 = "9427",
+        $32111 = "32111",
+        $4002 = "4002",
+        $4001 = "4001",
+        $3091 = "3091",
+        $3099 = "3099",
+        $445 = "445",
+        )
+
+        ##Build New Horizon 7 DFW Sections
+        ##Checks if Section exists first
+    
+        $SectionNames = 
+        "Horizon 7 Connectivity - Internal Connections",
+        "Horizon 7 Desktops - VDI or RDS Host",
+        "Horizon 7 Connectivity - Block All"
+        foreach ($item in $SectionNames) {
+        $Section = Get-NsxFirewallSection -Name "$item"
+        if (!$Section)
+        {
+        New-NsxFirewallSection -name $item | out-null
+        }}
+    
+        ##Build New Security Tags
+        ##Checks if exists first
+        ##$SecurityTagNames = 
+        ##"ST-Horizon7-ConnServer",
+        ##"ST-Horizon7-VDI",
+        ##"ST-Horizon7-RDSHost",
+        ##"ST-Horizon7-AppVolMgr",
+        ##"ST-Horizon7-UEM_FS",
+        ##"ST-Horizon7-DomainCtrl",
+        ##"ST-Horizon7-DNS",
+        ##"ST-Horizon7-V4H"
+        ##foreach ($item in $SecurityTagNames) {
+        ##$SecurityTag = Get-NsxSecurityTag -Name "$item"
+        ##if (!$SecurityTag)
+        ##{
+        ##New-NsxSecurityTag -name $item | out-null
+        ##}}
+
+        #Build New Security Groups
+           
+        $SGHZN7ConnServer = New-NsxSecurityGroup -name $SGHZN7ConnServerName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7ConnServerVIP;Get-NsxIpSet -Name $IPHorizon7ConnServer)
+        $SGHZN7VDI = New-NsxSecurityGroup -name $SGHZN7VDIName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7VDIRDSH)
+        $SGHZN7RDSHost = New-NsxSecurityGroup -name $SGHZN7RDSHostName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7VDIRDSH)
+        $SGHZN7AppVolMgr = New-NsxSecurityGroup -name $SGHZN7AppVolMgrName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7AppVol;Get-NsxIpSet -Name $IPHorizon7AppVolVIP)
+        $SGHZN7UEM_FS = New-NsxSecurityGroup -name $SGHZN7UEM_FSName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7UEM_FS)
+        $SGHZN7DomainCtrl = New-NsxSecurityGroup -name $SGHZN7DomainCtrlName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7DomainCtrl)
+        $SGHZN7DNS = New-NsxSecurityGroup -name $SGHZN7DNSName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7DNS)
+        $SGHZN7V4H = New-NsxSecurityGroup -name $SGHZN7V4HName -IncludeMember (Get-NsxIpSet -name $IPHorizon7V4H)
+        $SGHZN7BlockAll = New-NsxSecurityGroup -name $SGHZN7BlockAllName -IncludeMember (Get-NsxSecurityGroup -Name $SGHZN7DNSName;Get-NsxSecurityGroup -Name $SGHZN7AppVolMgrName;Get-NsxSecurityGroup -Name $SGHZN7ConnServerName;
+        Get-NsxSecurityGroup -Name $SGHZN7DomainCtrlName;Get-NsxSecurityGroup -Name $SGHZN7RDSHostName;Get-NsxSecurityGroup -Name $SGHZN7UEM_FSName;Get-NsxSecurityGroup -Name $SGHZN7V4HName;Get-NsxSecurityGroup -Name $SGHZN7VDIName;)
+              
+        #Build New Services
+    
+        $SVHZN7BEClient2AgentTCP = New-NsxService -name $SVHZN7BEClient2AgentTCPName -protocol $TCP -port $22443 -description "Horizon 7 Blast Extreme TCP Excellent Typical Horizon Client to Horizon Agent" -EnableInheritance
+        $SVHZN7BEClient2AgentUDP = New-NsxService -name $SVHZN7BEClient2AgentUDPName -protocol $UDP -port $22443 -description "Horizon 7 Blast Extreme UDP Typical Horizon Client to Horizon Agent" -EnableInheritance
+        $SVHZN7PCOIPClient2AgentTCP = New-NsxService -name $SVHZN7PCOIPClient2AgentTCPName -protocol $TCP -port $4172 -description "Horizon 7 PCoIP TCP Horizon Client to Horizon Agent" -EnableInheritance
+        $SVHZN7PCOIPClient2AgentUDP = New-NsxService -name $SVHZN7PCOIPClient2AgentUDPName -protocol $UDP -port $4172 -description "Horizon 7 PCoIP UDP Horizon Client to Horizon Agent" -EnableInheritance
+        $SVHZN7RDPClient2Agent = New-NsxService -name $SVHZN7RDPClient2AgentName -protocol $TCP -port $3389 -description "Horizon 7 RDP Horizon Client to Horizon Agent" -EnableInheritance
+        $SVHZN7CDRMMRClient2Agent = New-NsxService -name $SVHZN7CDRMMRClient2AgentName -protocol $TCP -port $9427 -description "Horizon 7 CDR MMR Horizon Client to Horizon Agent" -EnableInheritance
+        $SVHZN7USBClient2Agent = New-NsxService -name $SVHZN7USBClient2AgentName -protocol $TCP -port $32111 -description "Horizon 7 USB Horizon Client to Horizon Agent USB Redirection" -EnableInheritance
+        $SVHZN7Browser2AgentHTML = New-NsxService -name $SVHZN7Browser2AgentHTMLName -protocol $TCP -port $443 -description "Horizon 7 Browser to Horizon Agent HTML Access" -EnableInheritance
+        $SVHZN7Agent2ConnServerEnhanced = New-NsxService -name $SVHZN7Agent2ConnServerEnhancedName -protocol $TCP -port $4002 -description "Horizon 7 JMS Horizon Agent to Connection Server Enhanced" -EnableInheritance
+        $SVHZN7Agent2ConnServerLegacy = New-NsxService -name $SVHZN7Agent2ConnServerLegacyName -protocol $TCP -port $4001 -description "Horizon 7 JMS Horizon Agent to Connection Server Legacy" -EnableInheritance
+        $SVHZN7Agent2V4HRMI = New-NsxService -name $SVHZN7Agent2V4HRMIName -protocol $TCP -port $3091 -description "Horizon 7 Horizon Agent to V4H RMI" -EnableInheritance
+        $SVHZN7Agent2V4HDMS = New-NsxService -name $SVHZN7Agent2V4HDMSName -protocol $TCP -port $3099 -description "Horizon 7 Horizon Agent to V4H Desktop Message Server" -EnableInheritance
+        $SVAPPVAgent2APPVMGRSSL = New-NsxService -name $SVAPPVAgent2APPVMGRSSLName -protocol $TCP -port $443 -description "App Volumes Agent to App Volumes Manager SSL" -EnableInheritance
+        $SVAPPVAgent2APPVMGRSTD = New-NsxService -name $SVAPPVAgent2APPVMGRSTDName -protocol $TCP -port $80 -description "App Volumes Agent to App Volumes Manager Standard" -EnableInheritance
+           
+        #Build New Service Groups
+   
+        #Build Firewall Rules
+        
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2AgentName -source any -destination $SGHZN7VDIName -service $SVHZN7BEClient2AgentTCPName,$SVHZN7BEClient2AgentUDPName,$SVHZN7PCOIPClient2AgentTCPName,$SVHZN7PCOIPClient2AgentUDPName$SVHZN7RDPClient2AgentName,$SVHZN7CDRMMRClient2AgentName,$SVHZN7USBClient2AgentName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentHTMLName -source any -destination $SGHZN7VDIName -service $SVHZN7Browser2AgentHTMLName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2ConnServerName -source $SGHZN7VDIName -destination $SGHZN7ConnServerName -service $SVHZN7Agent2ConnServerEnhancedName,$SVHZN7Agent2ConnServerLegacyName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2V4HName -source $SGHZN7VDIName -destination $SGHZN7V4HName -service $SVHZN7Agent2V4HRMIName,$SVHZN7Agent2V4HDMSName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName,$SGHZN7V4HName -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNAPPVAgent2APPVMGRName -source $SGHZN7VDIName -destination $SGHZN7AppVolMgrName -service $SVAPPVAgent2APPVMGRSSLName,$SVAPPVAgent2APPVMGRSTDName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName,$SGHZN7AppVolMgrName -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNUEMMGR2UEMFSSMBName -source $SGHZN7VDIName -destination $SGHZN7UEM_FSName -service $SVUEMMGR2UEMFSSMBName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName,$SGHZN7UEM_FSName -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7BlockVDI2VDIName -source $SGHZN7vIDMName,$SGHZN7RDSHHostName -Destination $SGHZN7vIDMName,$SGHZN7RDSHHostName -service any -Action deny -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName
+ 
+
+    
