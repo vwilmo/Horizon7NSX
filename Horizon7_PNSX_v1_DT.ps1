@@ -26,7 +26,7 @@
         #DFW Firewall Section Names
         $SNHZN7ConnInternalSectionName = "Horizon 7 Connectivity - Internal Connections",
         $SNHZN7DesktopVDI_RDSHSectionName = "Horizon 7 Desktops - VDI or RDS Host",
-        $SNHZN7BlockAllName = "Horizon 7 Connectivity - Block All"    
+        $SNHZN7BlockAllName = "Horizon 7 Connectivity - Block All", 
         
         #DFW Rule Names
         $RNHZN7Client2AgentName = "Internal - Horizon Client to Horizon Agent",
@@ -55,16 +55,16 @@
         $SVAPPVAgent2APPVMGRSTDName = "App Volumes Agent to App Volumes Manager Standard",
         
         #IP Sets for VIPs and other
-        $IPHorizon7ConnServerVIP = "IP-Horizon7-ConnServer-VIP",
-        $IPHorizon7ConnServer = "IP-Horizon7-ConnServer"
-        $IPHorizon7UAGVIP = "IP-Horizon7-UAG-VIP",
-        $IPHorizon7AppVolVIP = "IP-Horizon7-AppVol-VIP",
-        $IPHorizon7AppVol = "IP-Horizon7-AppVol",
-        $IPHorizon7VDIRDSH = "IP-Horizon7-VDI-RDSH",
-        $IPHorizon7UEM_FS = "IP-Horizon7-UEM_FS",
-        $IPHorizon7V4H = "IP-Horizon7-V4H",
-        $IPHorizon7DomainCtrl = "IP-Horizon7-DomainCtrl",
-        $IPHorizon7DNS = "IP-Horizon7-DNS",
+        $IPHorizon7ConnServerVIPName = "IP-Horizon7-ConnServer-VIP",
+        $IPHorizon7ConnServerName = "IP-Horizon7-ConnServer",
+        $IPHorizon7UAGVIPName = "IP-Horizon7-UAG-VIP",
+        $IPHorizon7AppVolVIPName = "IP-Horizon7-AppVol-VIP",
+        $IPHorizon7AppVolName = "IP-Horizon7-AppVol",
+        $IPHorizon7VDIRDSHName = "IP-Horizon7-VDI-RDSH",
+        $IPHorizon7UEM_FSName = "IP-Horizon7-UEM_FS",
+        $IPHorizon7V4HName = "IP-Horizon7-V4H",
+        $IPHorizon7DomainCtrlName = "IP-Horizon7-DomainCtrl",
+        $IPHorizon7DNSName = "IP-Horizon7-DNS",
         
         #Service Port and Protocol
         
@@ -84,12 +84,13 @@
         $4001 = "4001",
         $3091 = "3091",
         $3099 = "3099",
-        $445 = "445",
+        $445 = "445"
         )
 
         ##Build New Horizon 7 DFW Sections
         ##Checks if Section exists first
-    
+        Write-host -ForegroundColor Green "Creating DFW Sections"
+
         $SectionNames = 
         "Horizon 7 Connectivity - Internal Connections",
         "Horizon 7 Desktops - VDI or RDS Host",
@@ -119,21 +120,36 @@
         ##New-NsxSecurityTag -name $item | out-null
         ##}}
 
+        #Build New IP Sets
+        Write-host -ForegroundColor Green "Creating IP Sets"
+
+        $IPHorizon7AppVol = New-NsxIpSet -name $IPHorizon7AppVolName -EnableInheritance
+        $IPHorizon7AppVolVIP = New-NsxIpSet -name $IPHorizon7AppVolName -EnableInheritance
+        $IPHorizon7ConnServer = New-NsxIpSet -name $IPHorizon7ConnServerName -EnableInheritance
+        $IPHorizon7ConnServerVIP = New-NsxIpSet -name $IPHorizon7ConnServerVIPName -EnableInheritance
+        $IPHorizon7DNS = New-NsxIpSet -name $IPHorizon7DNSName -EnableInheritance
+        $IPHorizon7DomainCtrl = New-NsxIpSet -name $IPHorizon7DomainCtrlName -EnableInheritance
+        $IPHorizon7UEM_FS = New-NsxIpSet -name $IPHorizon7UEM_FSName -EnableInheritance
+        $IPHorizon7V4H = New-NsxIpSet -name $IPHorizon7V4HName -EnableInheritance
+        $IPHorizon7VDIRDSH = New-NsxIpSet -name $IPHorizon7VDIRDSHName -EnableInheritance
+
         #Build New Security Groups
-           
-        $SGHZN7ConnServer = New-NsxSecurityGroup -name $SGHZN7ConnServerName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7ConnServerVIP;Get-NsxIpSet -Name $IPHorizon7ConnServer)
-        $SGHZN7VDI = New-NsxSecurityGroup -name $SGHZN7VDIName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7VDIRDSH)
-        $SGHZN7RDSHost = New-NsxSecurityGroup -name $SGHZN7RDSHostName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7VDIRDSH)
-        $SGHZN7AppVolMgr = New-NsxSecurityGroup -name $SGHZN7AppVolMgrName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7AppVol;Get-NsxIpSet -Name $IPHorizon7AppVolVIP)
-        $SGHZN7UEM_FS = New-NsxSecurityGroup -name $SGHZN7UEM_FSName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7UEM_FS)
-        $SGHZN7DomainCtrl = New-NsxSecurityGroup -name $SGHZN7DomainCtrlName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7DomainCtrl)
-        $SGHZN7DNS = New-NsxSecurityGroup -name $SGHZN7DNSName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7DNS)
-        $SGHZN7V4H = New-NsxSecurityGroup -name $SGHZN7V4HName -IncludeMember (Get-NsxIpSet -name $IPHorizon7V4H)
+        Write-host -ForegroundColor Green "Creating Security Groups"
+
+        $SGHZN7ConnServer = New-NsxSecurityGroup -name $SGHZN7ConnServerName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7ConnServerVIPName;Get-NsxIpSet -Name $IPHorizon7ConnServerName)
+        $SGHZN7VDI = New-NsxSecurityGroup -name $SGHZN7VDIName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7VDIRDSHName)
+        $SGHZN7RDSHost = New-NsxSecurityGroup -name $SGHZN7RDSHostName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7VDIRDSHName)
+        $SGHZN7AppVolMgr = New-NsxSecurityGroup -name $SGHZN7AppVolMgrName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7AppVolName;Get-NsxIpSet -Name $IPHorizon7AppVolVIPName)
+        $SGHZN7UEM_FS = New-NsxSecurityGroup -name $SGHZN7UEM_FSName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7UEM_FSName)
+        $SGHZN7DomainCtrl = New-NsxSecurityGroup -name $SGHZN7DomainCtrlName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7DomainCtrlName)
+        $SGHZN7DNS = New-NsxSecurityGroup -name $SGHZN7DNSName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7DNSName)
+        $SGHZN7V4H = New-NsxSecurityGroup -name $SGHZN7V4HName -IncludeMember (Get-NsxIpSet -name $IPHorizon7V4HName)
         $SGHZN7BlockAll = New-NsxSecurityGroup -name $SGHZN7BlockAllName -IncludeMember (Get-NsxSecurityGroup -Name $SGHZN7DNSName;Get-NsxSecurityGroup -Name $SGHZN7AppVolMgrName;Get-NsxSecurityGroup -Name $SGHZN7ConnServerName;
         Get-NsxSecurityGroup -Name $SGHZN7DomainCtrlName;Get-NsxSecurityGroup -Name $SGHZN7RDSHostName;Get-NsxSecurityGroup -Name $SGHZN7UEM_FSName;Get-NsxSecurityGroup -Name $SGHZN7V4HName;Get-NsxSecurityGroup -Name $SGHZN7VDIName;)
               
         #Build New Services
-    
+        Write-host -ForegroundColor Green "Creating Services"
+        
         $SVHZN7BEClient2AgentTCP = New-NsxService -name $SVHZN7BEClient2AgentTCPName -protocol $TCP -port $22443 -description "Horizon 7 Blast Extreme TCP Excellent Typical Horizon Client to Horizon Agent" -EnableInheritance
         $SVHZN7BEClient2AgentUDP = New-NsxService -name $SVHZN7BEClient2AgentUDPName -protocol $UDP -port $22443 -description "Horizon 7 Blast Extreme UDP Typical Horizon Client to Horizon Agent" -EnableInheritance
         $SVHZN7PCOIPClient2AgentTCP = New-NsxService -name $SVHZN7PCOIPClient2AgentTCPName -protocol $TCP -port $4172 -description "Horizon 7 PCoIP TCP Horizon Client to Horizon Agent" -EnableInheritance
@@ -152,7 +168,8 @@
         #Build New Service Groups
    
         #Build Firewall Rules
-        
+        Write-host -ForegroundColor Green "Creating Firewall Rules"
+
         Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2AgentName -source any -destination $SGHZN7VDIName -service $SVHZN7BEClient2AgentTCPName,$SVHZN7BEClient2AgentUDPName,$SVHZN7PCOIPClient2AgentTCPName,$SVHZN7PCOIPClient2AgentUDPName$SVHZN7RDPClient2AgentName,$SVHZN7CDRMMRClient2AgentName,$SVHZN7USBClient2AgentName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
         Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentHTMLName -source any -destination $SGHZN7VDIName -service $SVHZN7Browser2AgentHTMLName -action allow -AppliedTo $SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
         Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2ConnServerName -source $SGHZN7VDIName -destination $SGHZN7ConnServerName -service $SVHZN7Agent2ConnServerEnhancedName,$SVHZN7Agent2ConnServerLegacyName -action allow -AppliedTo $SGHZN7ConnServerName,$SGHZN7VDIName,$SGHZN7RDSHHostName -Position Top
