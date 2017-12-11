@@ -145,7 +145,7 @@
         $SGHZN7DNS = New-NsxSecurityGroup -name $SGHZN7DNSName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7DNSName)
         $SGHZN7V4H = New-NsxSecurityGroup -name $SGHZN7V4HName -IncludeMember (Get-NsxIpSet -name $IPHorizon7V4HName)
         $SGHZN7BlockAll = New-NsxSecurityGroup -name $SGHZN7BlockAllName -IncludeMember (Get-NsxSecurityGroup -Name $SGHZN7DNSName,Get-NsxSecurityGroup -Name $SGHZN7AppVolMgrName,Get-NsxSecurityGroup -Name $SGHZN7ConnServerName,
-        Get-NsxSecurityGroup -Name $SGHZN7DomainCtrlName,Get-NsxSecurityGroup -Name $SGHZN7RDSHostName,Get-NsxSecurityGroup -Name $SGHZN7UEM_FSName,Get-NsxSecurityGroup -Name $SGHZN7V4HName,Get-NsxSecurityGroup -Name $SGHZN7VDIName,)
+        Get-NsxSecurityGroup -Name $SGHZN7DomainCtrlName,Get-NsxSecurityGroup -Name $SGHZN7RDSHostName,Get-NsxSecurityGroup -Name $SGHZN7UEM_FSName,Get-NsxSecurityGroup -Name $SGHZN7V4HName,Get-NsxSecurityGroup -Name $SGHZN7VDIName)
               
         #Build New Services
         Write-host -ForegroundColor Green "Creating Services"
