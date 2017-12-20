@@ -430,7 +430,6 @@
             Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7UEM_MgrName)
             Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7ComposerName)
             Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7DomainCtrlName)
-            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7DNSName)
             Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7SMTPName)
             Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7ThinApp_FSName)
             Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN72FAName)
