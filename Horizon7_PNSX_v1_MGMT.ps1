@@ -417,30 +417,30 @@
         $SGHZN7VDIESXI = New-NsxSecurityGroup -name $SGHZN7VDIESXIName -IncludeMember (Get-NsxIpSet -name $IPHorizon7VDIESXiName)
         $SGHZN7UpdateServer = New-NsxSecurityGroup -name $SGHZN7UpdateServerName -IncludeMember (Get-NsxIpSet -name $IPHorizon7UpdateServerName)
         $SGHZN7All = New-NsxSecurityGroup -name $SGHZN7AllName -IncludeMember (Get-NsxSecurityGroup -Name $SGHZN7DNSName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7ConnServerName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7vIDMName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7UAGName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7VDIName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7RDSHostName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7EnrollServerName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7AppVolMgrName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7vCenterMGMTName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7vCenterVDI_RDSHName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7UEM_FSName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7UEM_MgrName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7ComposerName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7DomainCtrlName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7DNSName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7SMTPName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7ThinApp_FSName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN72FAName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7AirWatchName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7V4HName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7AdConName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7DatabaseName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7AllName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7VDIESXIName)
-            Add-NsxSecurityGroupMember -SecurityGroup $SGHZN7All -Member (Get-NsxSecurityGroup -Name $SGHZN7UpdateServerName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7ConnServerName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7vIDMName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7UAGName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7VDIName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7RDSHostName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7EnrollServerName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7AppVolMgrName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7vCenterMGMTName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7vCenterVDI_RDSHName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7UEM_FSName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7UEM_MgrName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7ComposerName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7DomainCtrlName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7DNSName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7SMTPName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7ThinApp_FSName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN72FAName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7AirWatchName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7V4HName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7AdConName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7DatabaseName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7AllName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7VDIESXIName)
+            Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7UpdateServerName)
         
         #Build New Services
     
@@ -566,7 +566,7 @@
         Write-host -ForegroundColor Green "Creating Firewall Rules"
         
         
-        Get-NsxFirewallSection $SNHZN7BlockAllName | New-NsxFirewallRule -Name $RNHZN7BlockAllName -source $SGHZN7All -destination $SGHZN7All -action Block -AppliedTo $SGHZN7All
+        Get-NsxFirewallSection $SNHZN7BlockAllName | New-NsxFirewallRule -Name $RNHZN7BlockAllName -source $SGHZN7All -destination $SGHZN7All -action deny -AppliedTo $SGHZN7All
         Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2ConnServerName -destination $SGHZN7ConnServer -service $SVHZN7Client2ConnServerHTTP,$SVHZN7Client2ConnServerHTTPS -action allow -AppliedTo $SGHZN7ConnServer -Position Top
         ##Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2AgentName -source $SGHZN7Client -destination $SGHZN7VDI -service $SVHZN7BEClient2AgentTCP,$SVHZN7BEClient2AgentUDP,$SVHZN7PCOIPClient2AgentTCP,$SVHZN7PCOIPClient2AgentUDP,$SVHZN7RDPClient2Agent,$SVHZN7CDRMMRClient2Agent,$SVHZN7USBClient2Agent -action allow -AppliedTo $SGHZN7Client,$SGHZN7VDI,$SGHZN7RDSHost -Position Top
         Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentHTMLName -destination $SGHZN7VDI -service $SVHZN7Browser2AgentHTML -action allow -AppliedTo $SGHZN7VDI -Position Top
