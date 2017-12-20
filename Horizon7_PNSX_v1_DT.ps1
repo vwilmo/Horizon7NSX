@@ -24,9 +24,10 @@
         $STHZN7V4HName = "ST-Horizon7-V4H",
                 
         #DFW Firewall Section Names
+        $SNHZN7BlockAllName = "Horizon 7 Connectivity - Block All",
         $SNHZN7ConnInternalSectionName = "Horizon 7 Connectivity - Internal Connections",
         $SNHZN7DesktopVDI_RDSHSectionName = "Horizon 7 Desktops - VDI or RDS Host",
-        $SNHZN7BlockAllName = "Horizon 7 Connectivity - Block All", 
+         
         
         #DFW Rule Names
         $RNHZN7Client2AgentName = "Internal - Horizon Client to Horizon Agent",
@@ -35,7 +36,7 @@
         $RNHZN7Agent2V4HName = "Desktops - Horizon Agent to V4H",
         $RNAPPVAgent2APPVMGRName = "Desktops - App Volumes Agent to App Volumes Manager",
         $RNUEMMGR2UEMFSSMBName = "Desktops - UEM Flex Engine to UEM File Servers",
-        $RNHZN7BlockVDI2VDIName = "Desktops - Block VDI to VDI",
+        $RNHZN7BlockAllName = "Block All",
         
         #Service Names
 
@@ -53,6 +54,7 @@
         $SVHZN7Agent2V4HDMSName = "Horizon 7 Horizon Agent to V4H Desktop Message Server",
         $SVAPPVAgent2APPVMGRSSLName = "App Volumes Agent to App Volumes Manager SSL",
         $SVAPPVAgent2APPVMGRSTDName = "App Volumes Agent to App Volumes Manager Standard",
+        $SVUEMMGR2UEMFSSMBName = "User Environment Manager to UEM File Servers SMB",
         
         #IP Sets for VIPs and other
         $IPHorizon7ConnServerVIPName = "IP-Horizon7-ConnServer-VIP",
@@ -92,9 +94,10 @@
         Write-host -ForegroundColor Green "Creating DFW Sections"
 
         $SectionNames = 
+        "Horizon 7 Connectivity - Block All",
         "Horizon 7 Connectivity - Internal Connections",
-        "Horizon 7 Desktops - VDI or RDS Host",
-        "Horizon 7 Connectivity - Block All"
+        "Horizon 7 Desktops - VDI or RDS Host"
+        
         foreach ($item in $SectionNames) {
         $Section = Get-NsxFirewallSection -Name "$item"
         if (!$Section)
@@ -136,23 +139,24 @@
         #Build New Security Groups
         Write-host -ForegroundColor Green "Creating Security Groups"
 
-        $SGHZN7ConnServer = New-NsxSecurityGroup -name $SGHZN7ConnServerName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7ConnServerVIPName
+        $SGHZN7ConnServer = New-NsxSecurityGroup -name $SGHZN7ConnServerName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7ConnServerVIPName)
         Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7ConnServerName) -Member (Get-NsxIpSet -Name $IPHorizon7ConnServerName)
         $SGHZN7VDI = New-NsxSecurityGroup -name $SGHZN7VDIName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7VDIRDSHName)
         $SGHZN7RDSHost = New-NsxSecurityGroup -name $SGHZN7RDSHostName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7VDIRDSHName)
-        $SGHZN7AppVolMgr = New-NsxSecurityGroup -name $SGHZN7AppVolMgrName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7AppVolName;Get-NsxIpSet -Name $IPHorizon7AppVolVIPName)
+        $SGHZN7AppVolMgr = New-NsxSecurityGroup -name $SGHZN7AppVolMgrName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7AppVolName)
+        Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -Name $SGHZN7AppVolMgrName) -Member (Get-NsxIpSet -Name $IPHorizon7AppVolVIPName)
         $SGHZN7UEM_FS = New-NsxSecurityGroup -name $SGHZN7UEM_FSName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7UEM_FSName)
         $SGHZN7DomainCtrl = New-NsxSecurityGroup -name $SGHZN7DomainCtrlName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7DomainCtrlName)
         $SGHZN7DNS = New-NsxSecurityGroup -name $SGHZN7DNSName -IncludeMember (Get-NsxIpSet -Name $IPHorizon7DNSName)
         $SGHZN7V4H = New-NsxSecurityGroup -name $SGHZN7V4HName -IncludeMember (Get-NsxIpSet -name $IPHorizon7V4HName)
         $SGHZN7BlockAll = New-NsxSecurityGroup -name $SGHZN7BlockAllName -IncludeMember (Get-NsxSecurityGroup -Name $SGHZN7DNSName)
-        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7AppVolMgrName)
-        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7ConnServerName)
-        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7DomainCtrlName)
-        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7RDSHostName)
-        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7UEM_FSName)
-        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7V4HName)
-        Add-NsxSecurityGroupMember -Member (Get-NsxSecurityGroup -Name $SGHZN7VDIName)
+        Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -name $SGHZN7BlockAllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7AppVolMgrName)
+        Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -name $SGHZN7BlockAllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7ConnServerName)
+        Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -name $SGHZN7BlockAllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7DomainCtrlName)
+        Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -name $SGHZN7BlockAllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7RDSHostName)
+        Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -name $SGHZN7BlockAllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7UEM_FSName)
+        Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -name $SGHZN7BlockAllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7V4HName)
+        Add-NsxSecurityGroupMember -SecurityGroup (Get-NsxSecurityGroup -name $SGHZN7BlockAllName) -Member (Get-NsxSecurityGroup -Name $SGHZN7VDIName)
               
         #Build New Services
         Write-host -ForegroundColor Green "Creating Services"
@@ -171,19 +175,22 @@
         $SVHZN7Agent2V4HDMS = New-NsxService -name $SVHZN7Agent2V4HDMSName -protocol $TCP -port $3099 -description "Horizon 7 Horizon Agent to V4H Desktop Message Server" -EnableInheritance
         $SVAPPVAgent2APPVMGRSSL = New-NsxService -name $SVAPPVAgent2APPVMGRSSLName -protocol $TCP -port $443 -description "App Volumes Agent to App Volumes Manager SSL" -EnableInheritance
         $SVAPPVAgent2APPVMGRSTD = New-NsxService -name $SVAPPVAgent2APPVMGRSTDName -protocol $TCP -port $80 -description "App Volumes Agent to App Volumes Manager Standard" -EnableInheritance
-           
+        $SVUEMMGR2UEMFSSMB = New-NsxService -name $SVUEMMGR2UEMFSSMBName -protocol $TCP -port $445 -description "User Environment Manager to UEM File Servers SMB" -EnableInheritance
+
+
         #Build New Service Groups
    
         #Build Firewall Rules
         Write-host -ForegroundColor Green "Creating Firewall Rules"
 
-        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2AgentName -destination $SGHZN7VDI -service $SVHZN7BEClient2AgentTCP,$SVHZN7BEClient2AgentUDP,$SVHZN7PCOIPClient2AgentTCP,$SVHZN7PCOIPClient2AgentUDP,$SVHZN7RDPClient2Agent,$SVHZN7CDRMMRClient2Agent,$SVHZN7USBClient2Agent -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost -Position Top
-        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentHTMLName -destination $SGHZN7VDI -service $SVHZN7Browser2AgentHTML -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost -Position Top
-        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2ConnServerName -source $SGHZN7VDI -destination $SGHZN7ConnServer -service $SVHZN7Agent2ConnServerEnhanced,$SVHZN7Agent2ConnServerLegacy -action allow -AppliedTo $SGHZN7ConnServer,$SGHZN7VDI,$SGHZN7RDSHost -Position Top
-        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2V4HName -source $SGHZN7VDI -destination $SGHZN7V4H -service $SVHZN7Agent2V4HRMI,$SVHZN7Agent2V4HDMS -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7V4H -Position Top
-        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNAPPVAgent2APPVMGRName -source $SGHZN7VDI -destination $SGHZN7AppVolMgr -service $SVAPPVAgent2APPVMGRSSL,$SVAPPVAgent2APPVMGRSTD -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7AppVolMgr -Position Top
-        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNUEMMGR2UEMFSSMBName -source $SGHZN7VDI -destination $SGHZN7UEM_FS -service $SVUEMMGR2UEMFSSMB -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7UEM_FS -Position Top
-        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7BlockVDI2VDIName -source $SGHZN7VDI,$SGHZN7RDSHost -Destination $SGHZN7vIDM,$SGHZN7RDSHost -service any -Action deny -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost -Position Bottom
+        Get-NsxFirewallSection $SNHZN7BlockAllName | New-NsxFirewallRule -Name $RNHZN7BlockAllName -source $SGHZN7BlockAll -Destination $SGHZN7BlockAll -action deny -AppliedTo $SGHZN7BlockAll
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Client2AgentName -destination $SGHZN7VDI,$SGHZN7RDSHost -service $SVHZN7BEClient2AgentTCP,$SVHZN7BEClient2AgentUDP,$SVHZN7PCOIPClient2AgentTCP,$SVHZN7PCOIPClient2AgentUDP,$SVHZN7RDPClient2Agent,$SVHZN7CDRMMRClient2Agent,$SVHZN7USBClient2Agent -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost -Position Top
+        Get-NsxFirewallSection $SNHZN7ConnInternalSectionName  | New-NsxFirewallRule -Name $RNHZN7Browser2AgentHTMLName -destination $SGHZN7VDI,$SGHZN7RDSHost -service $SVHZN7Browser2AgentHTML -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2ConnServerName -source $SGHZN7VDI,$SGHZN7RDSHost -destination $SGHZN7ConnServer -service $SVHZN7Agent2ConnServerEnhanced,$SVHZN7Agent2ConnServerLegacy -action allow -AppliedTo $SGHZN7ConnServer,$SGHZN7VDI,$SGHZN7RDSHost -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7Agent2V4HName -source $SGHZN7VDI,$SGHZN7RDSHost -destination $SGHZN7V4H -service $SVHZN7Agent2V4HRMI,$SVHZN7Agent2V4HDMS -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7V4H -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNAPPVAgent2APPVMGRName -source $SGHZN7VDI,$SGHZN7RDSHost -destination $SGHZN7AppVolMgr -service $SVAPPVAgent2APPVMGRSSL,$SVAPPVAgent2APPVMGRSTD -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7AppVolMgr -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNUEMMGR2UEMFSSMBName -source $SGHZN7VDI,$SGHZN7RDSHost -destination $SGHZN7UEM_FS -service $SVUEMMGR2UEMFSSMB -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7UEM_FS -Position Top
+        Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7BlockVDI2VDIName -source $SGHZN7VDI,$SGHZN7RDSHost -Destination $SGHZN7vIDM,$SGHZN7RDSHost -Action deny -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost -Position Bottom
  
 
     
