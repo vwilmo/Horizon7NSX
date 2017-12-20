@@ -26,7 +26,7 @@
             $SGHZN7DatabaseName = "SG-Horizon7-Database",
             $SGHZN7AllName = 'SG-Horizon7-ALL',
             $SGHZN7VDIESXIName = "SG-Horizon7-VDI-ESXi",
-            $SGHZN7UpdateServerName = "SG-Horizon7-UpdateServer"
+            $SGHZN7UpdateServerName = "SG-Horizon7-UpdateServer",
 
             
             #Security Tags
@@ -375,10 +375,19 @@
         #New-NsxSecurityGroup -name $item -IncludeMember   out-null
         #}}
 
+        #Build IP Sets
+        Write-host -ForegroundColor Green "Creating Load Balancer VIP IP Sets"
+        $IPHorizon7UpdateServerName = New-NsxIpSet -Name $IPHorizon7UpdateServerName
+        $IPHorizon7ConnServerVIPName =New-NsxIpSet -Name $IPHorizon7ConnServerVIPName
+        $IPHorizon7UAGVIPName = New-NsxIpSet -Name $IPHorizon7UAGVIPName
+        $IPHorizon7AppVolVIPName = New-NsxIpSet -Name $IPHorizon7AppVolVIPName
+        $IPHorizon7vIDMVIPName = New-NsxIpSet -Name $IPHorizon7vIDMVIPName
+        $IPHorizon7AdConName = New-NsxIpSet -Name $IPHorizon7AdConName
+        $IPHorizon7VDIESXiName = New-NsxIpSet -Name $IPHorizon7VDIESXiName
+
         Write-host -ForegroundColor Green "Creating Security Groups"
 
         $STHZN7AdCon = Get-NsxSecurityTag -name $STHZN7AdConName
-        $SGHZN7Client = New-NsxSecurityGroup -name $SGHZN7ClientName -IncludeMember (Get-NsxSecurityTag -Name $STHZN7ClientName)
         $SGHZN7ConnServer = New-NsxSecurityGroup -name $SGHZN7ConnServerName -IncludeMember (Get-NsxSecurityTag -Name $STHZN7ConnServerName)
         $SGHZN7vIDM = New-NsxSecurityGroup -name $SGHZN7vIDMName -IncludeMember (Get-NsxSecurityTag -Name $STHZN7vIDMName)
         $SGHZN7UAG = New-NsxSecurityGroup -name $SGHZN7UAGName -IncludeMember (Get-NsxSecurityTag -Name $STHZN7UAGName)
@@ -402,16 +411,7 @@
         $SGHZN7Database = New-NsxSecurityGroup -name $SGHZN7DatabaseName -IncludeMember (Get-NsxSecurityTag -name $STHZN7DatabaseName)
         $SGHZN7VDIESXI = New-NsxSecurityGroup -name $SGHZN7VDIESXIName -IncludeMember (Get-NsxIpSet -name $IPHorizon7VDIESXiName)
         $SGHZN7UpdateServer = New-NsxSecurityGroup -name $SGHZN7UpdateServerName -IncludeMember (Get-NsxIpSet -name $IPHorizon7UpdateServerName)
-        
-        #Build IP Sets
-        Write-host -ForegroundColor Green "Creating Load Balancer VIP IP Sets"
-        $IPHorizon7UpdateServerName = New-NsxIpSet -Name $IPHorizon7UpdateServerName
-        $IPHorizon7ConnServerVIPName =New-NsxIpSet -Name $IPHorizon7ConnServerVIPName
-        $IPHorizon7UAGVIPName = New-NsxIpSet -Name $IPHorizon7UAGVIPName
-        $IPHorizon7AppVolVIPName = New-NsxIpSet -Name $IPHorizon7AppVolVIPName
-        $IPHorizon7vIDMVIPName = New-NsxIpSet -Name $IPHorizon7vIDMVIPName
-        $IPHorizon7AdConName = New-NsxIpSet -Name $IPHorizon7AdConName
-        $IPHorizon7VDIESXiName = New-NsxIpSet -Name $IPHorizon7VDIESXiName
+               
         
         #Build New Services
     
