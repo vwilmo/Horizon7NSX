@@ -289,6 +289,7 @@
         ##Checks if Section exists first
     
         $SectionNames = 
+        "Horizon 7 Connectivity - Block All",
         "Horizon 7 Connectivity - External Connections",
         "Horizon 7 Connectivity - Tunneled Connections",
         "Horizon 7 Connectivity - Internal Connections",
@@ -300,7 +301,7 @@
         "Horizon 7 Infrastructure - App Volumes Manager",
         "Horizon 7 Infrastructure - vRealize Operations for Horizon",
         "Horizon 7 Infrastructure - Management",
-        "Horizon 7 Connectivity - Block All"
+        
 
         
         foreach ($item in $SectionNames) {
