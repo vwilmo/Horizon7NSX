@@ -95,8 +95,9 @@
 
         $SectionNames = 
         "Horizon 7 Connectivity - Block All",
-        "Horizon 7 Connectivity - Internal Connections",
-        "Horizon 7 Desktops - VDI or RDS Host"
+        "Horizon 7 Desktops - VDI or RDS Host",
+        "Horizon 7 Connectivity - Internal Connections"
+        
         
         foreach ($item in $SectionNames) {
         $Section = Get-NsxFirewallSection -Name "$item"
@@ -192,5 +193,3 @@
         Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNUEMMGR2UEMFSSMBName -source $SGHZN7VDI,$SGHZN7RDSHost -destination $SGHZN7UEM_FS -service $SVUEMMGR2UEMFSSMB -action allow -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost,$SGHZN7UEM_FS -Position Top
         Get-NsxFirewallSection $SNHZN7DesktopVDI_RDSHSectionName  | New-NsxFirewallRule -Name $RNHZN7BlockVDI2VDIName -source $SGHZN7VDI,$SGHZN7RDSHost -Destination $SGHZN7vIDM,$SGHZN7RDSHost -Action deny -AppliedTo $SGHZN7VDI,$SGHZN7RDSHost -Position Bottom
  
-
-    
